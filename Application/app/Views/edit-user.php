@@ -20,9 +20,9 @@
  
     <div class="row">
       <div class="col-md-9">
-        <form action="<?php echo base_url('user/update');?>" name="edit-user" id="edit-user" method="post" accept-charset="utf-8">
+        <!-- <form action="<?php //echo base_url('user/update');?>" name="edit-user" id="edit-user" method="post" accept-charset="utf-8">
  
-           <input type="hidden" name="id" class="form-control" id="user_id" value="<?php echo $user['user_id'] ?>">
+           <input type="hidden" name="user_id" class="form-control" id="user_id" value="<?php //echo $user['user_id'] ?>">
  
            <div class="form-group">
             <label for="formGroupExampleInput">User Name</label>
@@ -128,7 +128,7 @@
            <button type="submit" id="send_form" class="btn btn-success">Submit</button>
           </div>
           
-        </form>
+        </form> -->
       </div>
  
     </div>
