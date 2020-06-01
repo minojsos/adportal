@@ -8,3 +8,6 @@ Message: Category and subcategory crud done
 
 third commit
 Message: View advertisement, delete advertisement, (bugs in gallery adding photo)
+
+fourth commit
+Most of the Features Completed with Proper User Interfaces while Integrating some of Hariharan's offline tasks.

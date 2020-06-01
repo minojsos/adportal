@@ -22,7 +22,7 @@ class App extends BaseConfig
 	|
 	*/
 	// public $baseURL = 'http://localhost:8080/';
-	public $baseURL = 'http://localhost/Advertisement/adportal/Application/public/';
+	public $baseURL = 'http://localhost/adportal/adportal/Application/public/';
 
 	/*
 	|--------------------------------------------------------------------------
@@ -182,11 +182,11 @@ class App extends BaseConfig
 	| except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 	|
 	*/
-	public $sessionDriver            = 'CodeIgniter\Session\Handlers\FileHandler';
+	public $sessionDriver            = 'CodeIgniter\Session\Handlers\DatabaseHandler';
 	public $sessionCookieName        = 'ci_session';
 	public $sessionExpiration        = 7200;
-	public $sessionSavePath          = WRITEPATH . 'session';
-	public $sessionMatchIP           = false;
+	public $sessionSavePath          = 'ci_session';
+	public $sessionMatchIP           = true;
 	public $sessionTimeToUpdate      = 300;
 	public $sessionRegenerateDestroy = false;
 

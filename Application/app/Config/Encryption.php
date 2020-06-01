@@ -21,7 +21,7 @@ class Encryption extends BaseConfig
 	  | See the user guide for more info.
 	 */
 
-	public $key = '';
+	public $key = '472D4A614E645267556B58703273357638792F423F4528482B4D625065536856';
 
 	/*
 	  |--------------------------------------------------------------------------
