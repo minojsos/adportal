@@ -15,7 +15,7 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="subcategories/create" class="btn btn-primary" alt="Create SubCategories">Add New</a>
+                        <a href="subcategories/create" class="btn btn-orange" alt="Create SubCategories">Add New</a>
                     </div>
                 </div>
                 <br />

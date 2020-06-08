@@ -1,6 +1,6 @@
 <!-- Main Content -->
 <main>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <h1 class="welcome-message">Welcome to Ad Portal</h1>
@@ -109,6 +109,13 @@
                             
                             <input type="hidden" name="cat_id" class="form-control" id="cat_id" value="<?php echo $cat_id; ?>">
                             <input type="hidden" name="subcat_id" class="form-control" id="subcat_id" value="<?php echo $subcat_id; ?>">
+                            
+                            <div class="row">
+                                <div class="col-md-12" style="padding: 30px; border-bottom: 1px solid lightgray;">
+                                    <b><i class="fas fa-list fa-xs"></i> Category &rarr; <?php echo $cat_name; ?> &rarr; <?php echo $subcat_name; ?></b>
+                                </div>
+                            </div>
+                            <br />
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -175,6 +182,20 @@
                             <input type="hidden" name="subcat_id" class="form-control" id="subcat_id" value="<?php echo $subcat_id; ?>">
                             <input type="hidden" name="loc_id" class="form-control" id="loc_id" value="<?php echo $loc_id; ?>">
 
+                            <div class="row">
+                                <div class="col-md-12" style="padding: 30px; border-bottom: 1px solid lightgray;">
+                                    <b><i class="fas fa-list fa-xs"></i> Category &rarr; <?php echo $cat_name; ?> &rarr; <?php echo $subcat_name; ?></b>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-12" style="padding: 30px; border-bottom: 1px solid lightgray;"> 
+                                    <b><i class="fas fa-map-pin fa-xs"></i> Location &rarr; <?php echo $dist_name; ?> &rarr; <?php echo $city_name; ?></b>
+                                </div>
+                            </div>
+                            <br />
+
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="customer_id">Customer<span style="color:red;">*</span></label>
@@ -203,10 +224,23 @@
                                 <label for="description">Description<span style="color:red;">*</span></label>
                                 <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
                             </div>
+                            
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="form-group">
+                                        <label for="price">Price (Rs.)<span style="color:red;">*</span></label>
+                                        <input type="number" class="form-control" name="price" id="price" min="0.01" step="0.01" placeholder="Price"/>
+                                    </div>
+                                </div>
 
-                            <div class="form-group">
-                                <label for="price">Price (Rs.)<span style="color:red;">*</span></label>
-                                <input type="number" class="form-control" name="price" id="price" min="0.01" step="0.01" placeholder="Price"/>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                    <input class="form-check-input" type="checkbox" value="" id="negotiate" id="negotiate">
+                                    <label class="form-check-label" for="negotiate">
+                                        Negotiate
+                                    </label>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
@@ -218,14 +252,24 @@
                                         <div class="row">
                                             <div class="col-3 my-auto">
                                                 <div class="placeholder">
-                                                    <img style="width: 100%;height:150px;" src="<?php echo base_url().'\assets\images\placeholder.png'; ?>" id="img_one_preview" name="img_one_preview" alt="Preview Featured Image"/>
+                                                    <img style="width: 100%;height:270px;" src="<?php echo base_url().'\assets\images\placeholder.png'; ?>" id="img_one_preview" name="img_one_preview" alt="Preview Featured Image"/>
                                                 </div>
                                             </div>
 
                                             <div class="col-9 my-auto">
                                                 <div class="btn btn-orange">
                                                     Select a Photo
-                                                    <input type="file" name="img_one" id="img_one" class="hide-file" onchange="readURL(this,'#img_one_preview','two');">
+                                                    <input type="file" name="img_one" id="img_one" class="hide-file" onchange="readURL(this,'#img_one_preview','two');" required>
+                                                </div>
+                                                <br /><br />
+                                                <div class="form-group">
+                                                    <label for="title">Title</label>
+                                                    <input type="text" name="img_one_title" id="img_one_title" class="form-control" placeholder="Image Title"/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="alt_text">Alt Text</label>
+                                                    <input type="text" name="img_one_alt_text" id="img_one_alt_text" class="form-control" placeholder="Alernate Text"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -235,7 +279,7 @@
                                         <div class="row">
                                             <div class="col-3 my-auto">
                                                 <div class="placeholder">
-                                                    <img style="width: 100%;height:150px;" src="<?php echo base_url().'\assets\images\placeholder.png'; ?>" id="img_two_preview" name="img_two_preview" alt="Preview Featured Image"/>
+                                                    <img style="width: 100%;height:270px;" src="<?php echo base_url().'\assets\images\placeholder.png'; ?>" id="img_two_preview" name="img_two_preview" alt="Preview Featured Image"/>
                                                 </div>
                                             </div>
 
@@ -243,6 +287,16 @@
                                                 <div class="btn btn-orange">
                                                     Select a Photo
                                                     <input type="file" name="img_two" id="img_one" class="hide-file" onchange="readURL(this,'#img_two_preview','three');">
+                                                </div>
+                                                <br /><br />
+                                                <div class="form-group">
+                                                    <label for="title">Title</label>
+                                                    <input type="text" name="img_two_title" id="img_two_title" class="form-control" placeholder="Image Title"/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="alt_text">Alt Text</label>
+                                                    <input type="text" name="img_two_alt_text" id="img_two_alt_text" class="form-control" placeholder="Alernate Text"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -252,7 +306,7 @@
                                         <div class="row">
                                             <div class="col-3 my-auto">
                                                 <div class="placeholder">
-                                                    <img style="width: 100%;height:150px;" src="<?php echo base_url().'\assets\images\placeholder.png'; ?>" id="img_three_preview" name="img_three_preview" alt="Preview Featured Image"/>
+                                                    <img style="width: 100%;height:270px;" src="<?php echo base_url().'\assets\images\placeholder.png'; ?>" id="img_three_preview" name="img_three_preview" alt="Preview Featured Image"/>
                                                 </div>
                                             </div>
 
@@ -260,6 +314,16 @@
                                                 <div class="btn btn-orange">
                                                     Select a Photo
                                                     <input type="file" name="img_three" id="img_three" class="hide-file" onchange="readURL(this,'#img_three_preview','four');">
+                                                </div>
+                                                <br /><br />
+                                                <div class="form-group">
+                                                    <label for="title">Title</label>
+                                                    <input type="text" name="img_three_title" id="img_three_title" class="form-control" placeholder="Image Title"/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="alt_text">Alt Text</label>
+                                                    <input type="text" name="img_three_alt_text" id="img_three_alt_text" class="form-control" placeholder="Alernate Text"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -269,7 +333,7 @@
                                         <div class="row">
                                             <div class="col-3 my-auto">
                                                 <div class="placeholder">
-                                                    <img style="width: 100%;height:150px;" src="<?php echo base_url().'\assets\images\placeholder.png'; ?>" id="img_four_preview" name="img_four_preview" alt="Preview Featured Image"/>
+                                                    <img style="width: 100%;height:270px;" src="<?php echo base_url().'\assets\images\placeholder.png'; ?>" id="img_four_preview" name="img_four_preview" alt="Preview Featured Image"/>
                                                 </div>
                                             </div>
 
@@ -277,6 +341,16 @@
                                                 <div class="btn btn-orange">
                                                     Select a Photo
                                                     <input type="file" name="img_four" id="img_four" class="hide-file" onchange="readURL(this,'#img_four_preview',null);">
+                                                </div>
+                                                <br /><br />
+                                                <div class="form-group">
+                                                    <label for="title">Title</label>
+                                                    <input type="text" name="img_four_title" id="img_four_title" class="form-control" placeholder="Image Title"/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="alt_text">Alt Text</label>
+                                                    <input type="text" name="img_four_alt_text" id="img_four_alt_text" class="form-control" placeholder="Alernate Text"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -335,17 +409,17 @@
     </div>
 </footer>
 <!-- End Footer -->
-<!-- Scripts - Data Table -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" type="text/javascript"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
-<script src="https://kit.fontawesome.com/cdee1294ee.js" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>               
+<!-- Font Awesome-->
+<script src="https://kit.fontawesome.com/cdee1294ee.js" crossorigin="anonymous"></script>
+<!-- Data Tables -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<!-- Swiper -->
+<script src="https://unpkg.com/swiper/js/swiper.js"></script>
+<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+<!-- Chart JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>               
 <script>
     if ($("#advertisement_create").length > 0) {
         $("#advertisement_create").validate({
@@ -424,11 +498,59 @@
 
             reader.readAsDataURL(input.files[0]);
         }
+        
+        // Set Current Title and Alternate Title to Required as an image has been uploaded
+        document.getElementById(input.name+"_title").required = true;
+        document.getElementById(input.name+"_alt_text").required = true;
 
+        // If another image can be uploaded, set that to display
         if (next != null) {
             document.getElementById(next).style.display="block";
         }
     }
+    // Add TinyMCE to Description
+    tinymce.init({
+      selector: '#description',
+      menubar: false,
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount'
+    ],
+    toolbar: 'undo redo | formatselect | ' +
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help',
+    });
+
+    // AutoComplete Customer
+    $(document).ready(function(){
+
+        // Initialize 
+        $( "#cust" ).autocomplete({
+        source: function( request, response ) {
+            // Fetch data
+            $.ajax({
+            url: "<?=base_url()?>/customer/fetch",
+            type: 'post',
+            dataType: "json",
+            data: {
+                query: request.term
+            },
+            success: function( data ) {
+                response( data );
+            }
+            });
+        },
+        select: function (event, ui) {
+            // Set selection
+            $('#cust').val(ui.item.label); // display the selected text
+            $('#userid').val(ui.item.value); // save selected id to input
+            return false;
+        }
+        });
+
+    });
 </script>
 </body>
 </html>

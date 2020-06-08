@@ -15,7 +15,7 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="location/create" class="btn btn-primary" alt="Create Location">Add New</a>
+                            <a href="location/create" class="btn btn-orange" alt="Create Location">Add New</a>
                         </div>
                     </div>
                     <br />

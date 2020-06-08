@@ -14,49 +14,6 @@ class Advertisement extends Controller
 {
 
     /**
-     * 
-     */
-    public function addGallery($ad_id = null)
-    {
-        $modelAdvertisement = new AdvertisementModel();
- 
-        // $data['advertisement'] = $modelAdvertisement->orderBy('ad_id', 'DESC')->findAll();
-        // $data['advertisement'] = $modelAdvertisement->where('ad_id', $ad_id)->first();
-
-        foreach($modelAdvertisement->orderBy('id', 'DESC')->findAll() as $advertisementObj):
-            if($ad_id == $advertisementObj['id']){
-                $data['advertisement'] = $advertisementObj;
-            }
-        endforeach;
-
-        return view('create-gallery', $data);
-    }
-
-    /**
-     * Save a Galleryto the FilePath
-     */
-    public function uploadGallery()
-    {
-        if(isset($_FILES["image_file"]["name"]))  
-        {  
-            
-             $config['upload_path'] = 'C:/xampp/htdocs/Advertisement/adportal/Application/upload';  
-            //  $config['upload_path'] = './upload/';  
-             $config['allowed_types'] = 'jpg|jpeg|png|gif';  
-             $this->load->library('upload', $config);  
-             if(!$this->upload->do_upload('image_file'))  
-             {  
-                  echo $this->upload->display_errors();  
-             }  
-             else  
-             {  
-                  $data = $this->upload->data();  
-                  echo '<img src="'.base_url().'upload/'.$data["file_name"].'" width="300" height="225" class="img-thumbnail" />';  
-             }  
-        }  
-    }
-
-    /**
      * Index Page for Advertisements.
      * Retrieve all Advertisements, Users, Cateogires and SubCategories so tha thte page to display advertisements can be generated.
      */
@@ -66,6 +23,7 @@ class Advertisement extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Advertisements';
+        $seo['admin'] = true;
 
         session()->start();;
 
@@ -103,6 +61,7 @@ class Advertisement extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Advertisements';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -144,6 +103,7 @@ class Advertisement extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Advertisements';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -151,12 +111,22 @@ class Advertisement extends Controller
             if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true) {
                 helper(['form', 'url']);
 
+                // Category
+                $modelCategory = new CategoryModel();
+                $category = $modelCategory->where('id', $this->request->getVar('cat_id'))->first();
+                
                 // Sub category
                 $modelSubCategory = new SubcategoryModel();
-                $data['subcategories'] = $modelSubCategory->orderBy('sub_category_name', 'ASC')->findAll();
+                $subcategory = $modelSubCategory->where('id', $this->request->getVar('cat_'.$this->request->getVar('cat_id')))->first();
+
+                // Customer
+                $modelCustomer = new CustomerModel();
 
                 $data['cat_id'] = $this->request->getVar('cat_id');
                 $data['subcat_id'] = $this->request->getVar('cat_'.$data['cat_id']);
+                $data['cat_name'] = $category['category_name'];
+                $data['subcat_name'] = $subcategory['sub_category_name'];
+                $data['customer'] = $modelCustomer->orderBy('id','ASC')->findAll();
                 $data['step'] = 2;
 
                 // Location
@@ -169,10 +139,6 @@ class Advertisement extends Controller
                     }
                 }
                 $data['district']=$districts;
-
-                // Customer
-                $modelCustomer = new CustomerModel();
-                $data['customer'] = $modelCustomer->orderBy('id','ASC')->findAll();
 
                 echo view('Templates/Header', $seo);
                 echo view('Templates/Navigation');
@@ -192,21 +158,38 @@ class Advertisement extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Advertisements';
+        $seo['admin'] = true;
 
         session()->start();
 
         if (isset($_SESSION)) {
             if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true) {
                 helper(['form', 'url']);
+                
+                // Category
+                $modelCategory = new CategoryModel();
+                $category = $modelCategory->where('id', $this->request->getVar('cat_id'))->first();
 
                 // Sub category
                 $modelSubCategory = new SubcategoryModel();
-                $data['subcategories'] = $modelSubCategory->orderBy('sub_category_name', 'ASC')->findAll();
+                $subcategory = $modelSubCategory->where('id', $this->request->getVar('subcat_id'))->first();
+
+                // Location
+                $modelLocation = new LocationModel();
+
+                // Customer
+                $modelCustomer = new CustomerModel();
 
                 $data['cat_id'] = $this->request->getVar('cat_id');
                 $data['subcat_id'] = $this->request->getVar('subcat_id');
                 $data['district'] = $this->request->getVar('location_id');
+                $data['cat_name'] = $category['category_name'];
+                $data['subcat_name'] = $subcategory['sub_category_name'];
                 $data['loc_id'] = $this->request->getVar($data['district']);
+                $location = $modelLocation->where('id', $this->request->getVar($data['district']))->first();
+                $data['dist_name'] = $location['district'];
+                $data['city_name'] = $location['city'];
+
                 $data['step'] = 3;
 
                 // Location
@@ -244,6 +227,7 @@ class Advertisement extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Advertisements';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -262,6 +246,20 @@ class Advertisement extends Controller
                     $approved_date = NULL;
                 }
 
+                // 1 = Negotiable | 0 = Not Negotiable
+                $negotiate = $this->request->getVar('negotiate');
+                if ($negotiate == null) {
+                    $negotiate = 0;
+                } else {
+                    $negotiate = 1;
+                }
+
+                $urlFromTitle = url_title($this->request->getVar('title'), '-', true);
+                $length = 10;
+                $slug = $urlFromTitle.'-'.substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
+                echo '<h1>'.$urlFromTitle.'</h1>';
+                echo '<h1>'.$slug.'</h1>';
+
                 // Load Advertisement Data from Form
                 $data = [
                     'user_id' => session()->get('id'),
@@ -271,15 +269,16 @@ class Advertisement extends Controller
                     'end_date' => $this->request->getVar('end_date'),
                     'status' => $status,
                     'title' => $this->request->getVar('title'),
+                    'slug' => $slug,
                     'description' => $this->request->getVar('description'),
                     'price' => $this->request->getVar('price'),
+                    'negotiable' => $negotiate,
                     'location' => $this->request->getVar('loc_id'),
                     'customer_id' => $this->request->getVar('customer_id'),
                     'approved_date' => $approved_date,
                 ];
 
-                $save = $advertisementModel->insert($data);
-                $inserted_id = $advertisementModel->insert_id();
+                $inserted_id = $advertisementModel->insert($data);
 
                 // Load Images
                 $validated = $this->validate([
@@ -309,8 +308,7 @@ class Advertisement extends Controller
 
                     $data = [
                         'title' => $this->request->getVar('img_one_title'),
-                        'alt' => $this->request->getVar('img_one_alt'),
-                        'caption' => $this->request->getVar('img_one_caption'),
+                        'alt' => $this->request->getVar('img_one_alt_text'),
                         'path' => $fileName,
                         'featured' => 1,
                         'user_id' => $_SESSION['id'],
@@ -319,15 +317,14 @@ class Advertisement extends Controller
 
                     $save = $mediaModel->insert($data);
 
-                    if (!empty($this->request->getFile('img_two'))) {
+                    if (!empty($this->request->getVar('img_two_title')) && !empty($this->request->getVar('img_two_alt_text'))) {
                         $imgTwo = $this->request->getFile('img_two');
                         $fileName = $imgTwo->getRandomName();
                         $imgTwo->move(ROOTPATH . 'public/assets/uploads', $fileName);
 
                         $data = [
                             'title' => $this->request->getVar('img_two_title'),
-                            'alt' => $this->request->getVar('img_two_alt'),
-                            'caption' => $this->request->getVar('img_two_caption'),
+                            'alt' => $this->request->getVar('img_two_alt_text'),
                             'path' => $fileName,
                             'featured' => 0,
                             'user_id' => $_SESSION['id'],
@@ -337,15 +334,14 @@ class Advertisement extends Controller
                         $save = $mediaModel->insert($data);
                     }
 
-                    if (!empty($this->request->getFile('img_three'))) {
-                        $imgThree = $this->request->getFile('img_three');
-                        $fileName = $imgThree->getRandomName();
+                    if (!empty($this->request->getVar('img_three_title')) && !empty($this->request->getVar('img_three_alt_text'))) {
+                        $imgTwo = $this->request->getFile('img_three');
+                        $fileName = $imgTwo->getRandomName();
                         $imgThree->move(ROOTPATH . 'public/assets/uploads', $fileName);
 
                         $data = [
                             'title' => $this->request->getVar('img_three_title'),
-                            'alt' => $this->request->getVar('img_three_alt'),
-                            'caption' => $this->request->getVar('img_three_caption'),
+                            'alt' => $this->request->getVar('img_three_alt_text'),
                             'path' => $fileName,
                             'featured' => 0,
                             'user_id' => $_SESSION['id'],
@@ -355,15 +351,14 @@ class Advertisement extends Controller
                         $save = $mediaModel->insert($data);
                     }
 
-                    if (!empty($this->request->getFile('img_four'))) {
-                        $imgFour = $this->request->getFile('img_four');
-                        $fileName = $imgFour->getRandomName();
+                    if (!empty($this->request->getVar('img_four_title')) && !empty($this->request->getVar('img_four_alt_text'))) {
+                        $imgTwo = $this->request->getFile('img_four');
+                        $fileName = $imgTwo->getRandomName();
                         $imgFour->move(ROOTPATH . 'public/assets/uploads', $fileName);
 
                         $data = [
                             'title' => $this->request->getVar('img_four_title'),
-                            'alt' => $this->request->getVar('img_four_alt'),
-                            'caption' => $this->request->getVar('img_four_caption'),
+                            'alt' => $this->request->getVar('img_four_alt_text'),
                             'path' => $fileName,
                             'featured' => 0,
                             'user_id' => $_SESSION['id'],
@@ -372,6 +367,57 @@ class Advertisement extends Controller
 
                         $save = $mediaModel->insert($data);
                     }
+
+                    // if (!empty($this->request->getFile('img_two')) && !empty($_FILES['userfile']['img_two'])) {
+                    //     $imgTwo = $this->request->getFile('img_two');
+                    //     $fileName = $imgTwo->getRandomName();
+                    //     $imgTwo->move(ROOTPATH . 'public/assets/uploads', $fileName);
+
+                    //     $data = [
+                    //         'title' => $this->request->getVar('img_two_title'),
+                    //         'alt' => $this->request->getVar('img_two_alt_text'),
+                    //         'path' => $fileName,
+                    //         'featured' => 0,
+                    //         'user_id' => $_SESSION['id'],
+                    //         'ad_id' => $inserted_id,
+                    //     ];
+
+                    //     $save = $mediaModel->insert($data);
+                    // }
+
+                    // if (!empty($this->request->getFile('img_three')) && !empty($_FILES['userfile']['img_three'])) {
+                    //     $imgThree = $this->request->getFile('img_three');
+                    //     $fileName = $imgThree->getRandomName();
+                    //     $imgThree->move(ROOTPATH . 'public/assets/uploads', $fileName);
+
+                    //     $data = [
+                    //         'title' => $this->request->getVar('img_three_title'),
+                    //         'alt' => $this->request->getVar('img_three_alt_text'),
+                    //         'path' => $fileName,
+                    //         'featured' => 0,
+                    //         'user_id' => $_SESSION['id'],
+                    //         'ad_id' => $inserted_id,
+                    //     ];
+
+                    //     $save = $mediaModel->insert($data);
+                    // }
+
+                    // if (!empty($this->request->getFile('img_four')) && !empty($_FILES['userfile']['img_four'])) {
+                    //     $imgFour = $this->request->getFile('img_four');
+                    //     $fileName = $imgFour->getRandomName();
+                    //     $imgFour->move(ROOTPATH . 'public/assets/uploads', $fileName);
+
+                    //     $data = [
+                    //         'title' => $this->request->getVar('img_four_title'),
+                    //         'alt' => $this->request->getVar('img_four_alt_text'),
+                    //         'path' => $fileName,
+                    //         'featured' => 0,
+                    //         'user_id' => $_SESSION['id'],
+                    //         'ad_id' => $inserted_id,
+                    //     ];
+
+                    //     $save = $mediaModel->insert($data);
+                    // }
                     
                 }
 

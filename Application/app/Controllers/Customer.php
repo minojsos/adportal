@@ -20,6 +20,7 @@ class Customer extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Customers';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -48,6 +49,7 @@ class Customer extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Customers';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -66,12 +68,51 @@ class Customer extends Controller
     }
 
     /**
+     * Fetch a Customer Given the name.
+     */
+    public function fetch() {
+        $customerModel = new CustomerModel();
+        $customers = $customerModel->orderBy('id','ASC')->findAll();
+        $query = $this->request->getVar('query');
+        
+        if ($query != null) {
+            foreach($customers as $customer) {
+                $fullname = $customer['fname'].' '.$customer['lname'];
+                if (strpos($fullname, $query) !== false) {
+                    $data[] = array(
+                        'fname' => $customer['fname'],
+                        'lname' => $customer['lname'],
+                        'phone' => $customer['contact_no']
+                    );
+                }
+            }
+            
+            if (isset($data)) {
+                echo json_encode($data);
+            }
+        } else {
+            foreach($customers as $customer) {
+                $data[] = array(
+                    'fname' => $customer['fname'],
+                    'lname' => $customer['lname'],
+                    'phone' => $customer['contact_no']
+                );
+            }
+
+            if (isset($data)) {
+                echo json_encode($data);
+            }
+        }
+    }
+
+    /**
      * Store the New Customer and Display a Success Message.
      */
     public function store() {
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Customers';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -110,6 +151,7 @@ class Customer extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Customers';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -135,6 +177,7 @@ class Customer extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Customers';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -196,6 +239,7 @@ class Customer extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Customers';
+        $seo['admin'] = true;
 
         session()->start();
 

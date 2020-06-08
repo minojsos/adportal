@@ -21,7 +21,8 @@ class Login extends Controller
         // Retrieve Website Settings and Title.
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
-        $seo['title'] = 'Login';
+		$seo['title'] = 'Login';
+		$seo['admin'] = true;
 
 		session()->start();
 		
@@ -35,7 +36,7 @@ class Login extends Controller
 
 		// If a POST request has been recieved, then process the request.
 		// The POST request should be login request.
-        $data = [];
+		$data = [];
 		helper(['form']);
 		if ($this->request->getMethod() == 'post') {
 

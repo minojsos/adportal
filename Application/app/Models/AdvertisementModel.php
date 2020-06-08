@@ -5,7 +5,7 @@ use CodeIgniter\Model;
 class AdvertisementModel extends Model
 {
     protected $table = 'advertisement';
-    protected $allowedFields = ['user_id', 'cat_id', 'subcat_id', 'post_date', 'end_date', 'status', 'title', 'description', 'price', 'location', 'report_count', 'customer_id', 'approved_date', 'views'];
+    protected $allowedFields = ['user_id', 'cat_id', 'subcat_id', 'post_date', 'end_date', 'status', 'title', 'description', 'price', 'negotiate', 'location', 'report_count', 'customer_id', 'approved_date', 'views'];
     protected $beforeInsert = ['beforeInsert'];
     protected $beforeUpdate = ['beforeUpdate'];
 
@@ -17,6 +17,10 @@ class AdvertisementModel extends Model
     protected function beforeUpdate(array $data) {
 
         return $data;
+    }
+
+    public function top5rows() {
+
     }
 
 }

@@ -1,49 +1,78 @@
-<!-- Header Navigation -->
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-blue">
-        <!-- Navbar content -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="<?php echo base_url(); ?>/">Ad Portal</a>
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                
-                <li class="nav-item active">
-                    <a class="nav-link" href="<?php echo base_url().'/all_ads'; ?>"><i class="fas fa-tachometer-alt"></i> Home <span class="sr-only">(current)</span></a>
-                </li>
-                
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Categories
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <?php
-                            foreach ($category as $cat) {
-                                echo '<a class="dropdown-item" href="view-cat/'.$cat['id'].'" alt="Category - '.$cat['category_name'].'">'.$cat['category_name'].'</a>';
-                            }
-                        ?>
-                    </div>
-                </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Districts
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <?php
-                            foreach ($district as $dist) {
-                                echo '<a class="dropdown-item" href="view-cat/'.$dist.'" alt="Category - '.$dist.'">'.$dist.'</a>';
-                            }
-                        ?>
+<header>
+    <div id="header-three" class="header-style1 header-fixed">
+        <div class="header-top-bar top-bar-style1">
+            <div class="container">
+                <div class="row no-gutters">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-8">
+                        <div class="top-bar-left">
+                            <a href="post-ad.html" class="cp-default-btn d-lg-none">Post Your Ad</a>
+                            <p class="d-none d-lg-block">
+                                <i class="fa fa-life-ring" aria-hidden="true"></i>Have any questions? +94 77 123 4567 or sales@beluxa.lk
+                            </p>
+                        </div>
                     </div>
-                </li>
-                
-            </ul>
-            <span class="navbar-text">
-                <a class="nav-link post-ad-btn" href="<?php echo base_url().'/post-ad'; ?>" alt="Post an Advertisement"><i class="far fa-edit" style="margin-right: 10px;"></i> Post an Ad</a>
-            </span>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-4">
+                        <div class="top-bar-right">
+                            <ul>
+                                <li class="hidden-mb">
+                                    <a class="login-btn" href="#" id="login-button">
+                                        <i class="fa fa-comments-o" aria-hidden="true"></i>Live Chat
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
+        <div class="main-menu-area bg-primary" id="sticker" style="box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);">
+            <div class="container">
+                <div class="row no-gutters d-flex align-items-center">
+                    <div class="col-lg-2 col-md-2 col-sm-3">
+                        <div class="logo-area">
+                            <a href="<?php echo base_url(); ?>" class="img-fluid">
+                                <img src="img/logo.png" alt="logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-6 possition-static">
+                        <div class="cp-main-menu">
+                            <nav>
+                                <ul>
+                                    <li><a href="<?php base_url(); ?>/">Home</a></li>
+                                    <li><a href="<?php base_url(); ?>/about">Who We Are</a></li>
+                                    <li><a href="<?php base_url(); ?>">How It Works?</a></li>
+                                    <li><a href="<?php base_url(); ?>/contact">Contact</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-3 text-right">
+                        <a href="#" class="cp-default-btn">Post Your Ad</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu Area Start -->
+    <div class="mobile-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mobile-menu">
+                        <nav id="dropdown">
+                            <ul>
+                                <li><a href="<?php base_url(); ?>/">Home</a></li>
+                                <li><a href="about.html">Who We Are</a></li>
+                                <li><a href="how-it-works.html">How It Works?</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu Area End -->
 </header>
-<!-- End Header Navigation -->

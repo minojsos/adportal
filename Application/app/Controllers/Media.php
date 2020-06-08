@@ -15,6 +15,7 @@ class Media extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Media';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -42,6 +43,7 @@ class Media extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Media';
+        $seo['admin'] = true;
 
         session()->start();
         
@@ -67,6 +69,7 @@ class Media extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Media';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -100,6 +103,7 @@ class Media extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Media';
+        $seo['admin'] = true;
 
         session()->start();
 

@@ -40,6 +40,7 @@ main {
     min-height: 100%;
     padding: 25px;
     background-color: rgba(255,255,255,1.0);
+    padding-top: 100px;
 }
 
 /** Footer **/
@@ -435,7 +436,7 @@ Hide Choose File Button in Form
     cursor: pointer;
     right: 0;
     top: 0;
-    height: 100%;
+    height: auto;
     font-size: 24px;
     width: 100%;
     
@@ -450,42 +451,7 @@ Hide Choose File Button in Form
     text-align: center;
 }
 
-/***
-==========
-Navigation
-==========
 
-1. Navigation Link
-2. Dropdown Menu
-3. Navigation Link Icon
-4. Post Ad Button
-***/
-.navbar-dark .navbar-nav .nav-link {
-    font-weight: 400!important;
-}
-
-.dropdown-menu {
-    border-radius: 0rem!important;
-}
-
-.navbar-dark .navbar-nav .nav-link i {
-    padding-right: 10px;
-}
-
-.post-ad-btn {
-    font-weight: 500;
-    background-color: rgba(255, 255, 255, 1.0)!important;
-    border: 2px solid rgba(255, 255, 255, 1.0)!important;
-    color: #173152!important;
-    border-radius: 10px;
-    border: none;
-    transition: 0.3s ease-in-out
-}
-
-.post-ad-btn:hover {
-    background-color: #173152!important;
-    color: rgba(255,255,255,1.0)!important;
-}
 /**
 ======
 Images
@@ -958,34 +924,3 @@ Advertisement Card
       width: 30px;
     }
 }
-
-/**
-========
-Carousel
-========
-**/
-.carousel-control 			 { width:  4%; }
-.carousel-control.left,.carousel-control.right {margin-left:15px;background-image:none;}
-@media (max-width: 767px) {
-	.carousel-inner .active.left { left: -100%; }
-	.carousel-inner .next        { left:  100%; }
-	.carousel-inner .prev		 { left: -100%; }
-	.active > div { display:none; }
-	.active > div:first-child { display:block; }
-
-}
-@media (min-width: 767px) and (max-width: 992px ) {
-	.carousel-inner .active.left { left: -50%; }
-	.carousel-inner .next        { left:  50%; }
-	.carousel-inner .prev		 { left: -50%; }
-	.active > div { display:none; }
-	.active > div:first-child { display:block; }
-	.active > div:first-child + div { display:block; }
-}
-@media (min-width: 992px ) {
-	.carousel-inner .active.left { left: -25%; }
-	.carousel-inner .next        { left:  25%; }
-	.carousel-inner .prev		 { left: -25%; }	
-}
-
-  

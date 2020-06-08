@@ -19,6 +19,7 @@ class Admin extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Dashboard';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -29,6 +30,7 @@ class Admin extends Controller
                 $modelCategory = new CategoryModel();
                 $modelAdmin = new UserModel();
                 $modelLocation = new LocationModel();
+                $modelMedia = new MediaModel();
 
                 $data['advertisement'] = $modelAdvertisement->orderBy('id', 'DESC')->findAll();
                 $data['countAd'] = count($data['advertisement']);
@@ -36,6 +38,7 @@ class Admin extends Controller
                 $data['countCust'] = count($data['customer']);
                 $data['category'] = $modelCategory->orderBy('id', 'ASC')->findAll();
                 $data['countCat'] = count($data['category']);
+                $data['media'] = $modelMedia->orderBy('ad_id','DESC')->findAll();
 
                 $data['admin'] = $modelAdmin->orderBy('id', 'ASC')->findAll();
 

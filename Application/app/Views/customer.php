@@ -15,7 +15,7 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="customer/create" class="btn btn-primary" alt="Create Customers">Add New</a>
+                            <a href="customer/create" class="btn btn-orange" alt="Create Customers">Add New</a>
                         </div>
                     </div>
                     <br />

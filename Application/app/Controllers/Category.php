@@ -15,6 +15,7 @@ class Category extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Categories';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -41,6 +42,7 @@ class Category extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Categories';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -66,6 +68,7 @@ class Category extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Categories';
+        $seo['admin'] = true;
 
         session()->start();
         
@@ -115,6 +118,7 @@ class Category extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Categories';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -146,6 +150,7 @@ class Category extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Categories';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -177,6 +182,7 @@ class Category extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Categories';
+        $seo['admin'] = true;
 
         session()->start();
         

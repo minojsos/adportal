@@ -19,6 +19,7 @@ class Customer extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Frequently Asked Questions';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -47,6 +48,7 @@ class Customer extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Frequently Asked Questions';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -69,6 +71,7 @@ class Customer extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Frequently Asked Questions.';
+        $seo['admin'] = true;
 
         session()->start();
         
@@ -98,6 +101,7 @@ class Customer extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Frequently Asked Questions';
+        $seo['admin'] = true;
 
         session()->start();
         
@@ -123,6 +127,7 @@ class Customer extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Users';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -154,6 +159,7 @@ class Customer extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Users';
+        $seo['admin'] = true;
 
         session()->start();
 

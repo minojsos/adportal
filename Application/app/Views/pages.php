@@ -17,7 +17,7 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="page/create" class="btn btn-primary" alt="Create Pages">Add New</a>
+                        <a href="page/create" class="btn btn-orange" alt="Create Pages">Add New</a>
                     </div>
                 </div>
                 <br />

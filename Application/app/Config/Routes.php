@@ -49,3 +49,10 @@ if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 {
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
+
+// SEO Friendly URLs
+$routes->add('ad/(:any)','Home::index/$1');
+// $routes->add('search/(:any)', 'Search::index/$1');
+// $routes->add('search/(:any)/(:any)', 'Search::index/$1/$2');
+// $routes->add('search/(:any)/(:any)/(:any)', 'Search::index/$1/$2/$3');
+// $routes->add('search/(:any)/(:any)/(:any)/(:any)', 'Search::index/$1/$2/$3/$4');

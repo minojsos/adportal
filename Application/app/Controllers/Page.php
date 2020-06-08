@@ -18,6 +18,7 @@ class Page extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Pages';
+        $seo['admin'] = true;
 
         session()->start();
 
