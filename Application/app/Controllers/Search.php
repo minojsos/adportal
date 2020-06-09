@@ -74,8 +74,11 @@ class Search extends BaseController
         $term=$this->request->getVar('term');
         if ($term == null) {
             $term = "";
+        } else {
+            $data['term'] = $term;
         }
 
+        
         // If first parameter is null then all ads
         if ($param1 == null) {
             // Retrieve all the advertisements and display all ads

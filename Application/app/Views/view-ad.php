@@ -139,7 +139,9 @@
                                 </div>
                             </div>
                             <ul class="item-actions border-top">
-                                <li><a href="#"><i class="fa fa-heart" aria-hidden="true"></i>Save Ad</a></li>
+                                <li>
+                                    <a href="#" onclick="savead(<?php echo $advertisement['id']; ?>, '<?php echo $advertisement['title']; ?>');"><i class="fa fa-heart" aria-hidden="true" id="saveadicon"></i><span id="saveadbtn">Save Ad</span></a>
+                                </li>
                                 <li><a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i>Share ad</a></li>
                                 <li><a href="#"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Report abuse</a></li>
                             </ul>
@@ -579,6 +581,32 @@
         } else {
             url = '<?php echo base_url(); ?>' + '/search/index/' + $('[name=location]').val() + '/' + $('[name=categories]').val() + '?term=' + $('[name=term]').val();
             $(this).attr('action', url);
+        }
+    });
+
+    function savead(id,title) {
+        var itm = localStorage.getItem(id);
+        
+        if (itm == null) {
+            localStorage.setItem(id, title);
+            document.getElementById('saveadbtn').innerHTML = "Saved";
+            document.getElementById('saveadbtn').style.color = "#e74c3c";
+            document.getElementById('saveadicon').style.color = "#e74c3c";
+        } else {
+            // Remove Item
+            localStorage.removeItem(id);
+            document.getElementById('saveadbtn').innerHTML = "Save Ad";
+            document.getElementById('saveadbtn').style.color = "";
+            document.getElementById('saveadicon').style.color = "";
+        }
+    }
+
+    $(document).ready(function() {
+        var itm = localStorage.getItem(<?php echo $advertisement['id']; ?>);
+        if (itm != null) {
+            document.getElementById('saveadbtn').innerHTML = "Saved";
+            document.getElementById('saveadbtn').style.color = "#e74c3c";
+            document.getElementById('saveadicon').style.color = "#e74c3c";
         }
     });
 </script>

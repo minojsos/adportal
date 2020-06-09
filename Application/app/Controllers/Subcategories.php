@@ -16,6 +16,7 @@ class Subcategories extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Subcategories';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -46,6 +47,7 @@ class Subcategories extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Subcategories';
+        $seo['admin'] = true;
 
         session()->start();
         
@@ -73,6 +75,7 @@ class Subcategories extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Subcategories';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -104,6 +107,7 @@ class Subcategories extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'Subcategories';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -138,6 +142,7 @@ class Subcategories extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'SubCategories';
+        $seo['admin'] = true;
 
         session()->start();
 
@@ -169,6 +174,7 @@ class Subcategories extends Controller
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
         $seo['title'] = 'SubCategories';
+        $seo['admin'] = true;
 
         session()->start();
 

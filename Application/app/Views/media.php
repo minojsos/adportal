@@ -23,10 +23,18 @@
                                         foreach($media as $mediaObj) {
                                             echo '<div class="col-md-3">';
                                                 echo '<div class="media-img">';
-                                                    echo '<img src="'.$mediaObj['path'].'" alt="'.$mediaObj['alt'].'"/>';
+                                                    echo '<img src="'.base_url().'/assets/uploads/'.$mediaObj['path'].'" alt="'.$mediaObj['alt'].'" style="width:100%;height:156px;"/>';
                                                     echo '<div class="content">';
                                                         echo '<h4 class="title">'.$mediaObj['title'].'</h4>';
-                                                        echo '<p>'.$mediaObj['caption'].'</p>';
+                                                        echo '<input type="text" name="path" id="path" value="'.base_url().'/assets/uploads/'.$mediaObj['path'].'" disabled><br>';
+                                                        echo '<div class="row icons">';
+                                                            echo '<div class="col-md-6">';
+                                                                echo '<a href="'.base_url().'/media/edit/'.$mediaObj['id'].'" alt="Edit Media"><i class="far fa-edit"></i> Edit</a>';
+                                                            echo '</div>';
+                                                            echo '<div class="col-md-6">';
+                                                                echo '<a href="'.base_url().'/media/delete/'.$mediaObj['id'].'" alt="Delete Media"><i class="far fa-trash-alt"></i> Delete</a>';
+                                                            echo '</div>';
+                                                        echo '</div>';
                                                     echo '</div>';
                                                 echo '</div>';
                                             echo '</div>';
@@ -81,7 +89,6 @@
     </footer>
     <!-- End Footer -->
     <!-- Scripts - Data Table -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>  

@@ -35,8 +35,8 @@ class Media extends Controller
     }
 
     /**
-     * Edit Frequently Asked Question Page.
-     * Allow the Administrator to Edit a Question.
+     * Edit Media Page.
+     * Allow the Administrator to Edit a Media.
      */
     public function edit($media_id = null)
     {
@@ -49,8 +49,8 @@ class Media extends Controller
         
         if (isset($_SESSION)) {
             if (isset($_SESSION['isLoggedIn']) && ($_SESSION['isLoggedIn'] == true) && ($_SESSION['privilege'] == 1)) {
-                $model = new UserModel();
-                $data['faq'] = $model->where('id', $media_id)->first();
+                $modelMedia = new MediaModel();
+                $data['mediaObj'] = $modelMedia->where('id', $media_id)->first();
 
                 echo view('Templates/Header', $seo);
                 echo view('Templates/Navigation');
@@ -76,17 +76,23 @@ class Media extends Controller
         if (isset($_SESSION)) {
             if (isset($_SESSION['isLoggedIn']) && ($_SESSION['isLoggedIn'] == true) && ($_SESSION['privilege'] == 1)) {
                 helper(['form', 'url']);
-                $model = new MediaModel();
+                $modelMedia = new MediaModel();
                 $media_id = $this->request->getVar('media_id');
                 
-                $data = [
-                    'title' => $this->request->getVar('title'),
-                    'alt' => $this->request->getVar('alt'),
-                    'caption' => $this->request->getVar('caption'),
-                    'featured' => $this->request->getVar('featured'),
-                ];
+                if (empty($this->request->getVar('img'))) {
+                    $data = [
+                        'title' => $this->request->getVar('title'),
+                        'alt' => $this->request->getVar('alt'),
+                    ];
+                } else {
+                    $data = [
+                        'title' => $this->request->getVar('title'),
+                        'alt' => $this->request->getVar('alt'),
+                        'path' => $this->request->getVar('path'),
+                    ];
+                }
 
-                $save = $model->update($media_id,$data);
+                $save = $modelMedia->update($media_id,$data);
                 
                 return redirect()->to(base_url('media'))->with('msg','Successfully Updated Media');
             }
@@ -98,7 +104,7 @@ class Media extends Controller
     /**
      * Delete a Frequently Asked Question and Display a Success Message.
      */
-    public function delete($faq_id = null)
+    public function delete($media_id = null)
     {
         $modelSetting = new SettingModel();
         $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
@@ -110,7 +116,7 @@ class Media extends Controller
         if (isset($_SESSION)) {
             if (isset($_SESSION['isLoggedIn']) && ($_SESSION['isLoggedIn'] == true) && ($_SESSION['privilege'] == 1)) {
                 $model = new MediaModel();
-                $data['faq'] = $model->where('id', $media_id)->delete();
+                $data['media'] = $model->where('id', $media_id)->delete();
 
                 return redirect()->to(base_url('media'))->with('msg', 'Successfully Deleted Media');
             }

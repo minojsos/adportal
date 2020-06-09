@@ -60,33 +60,7 @@
                             <div class="gradient-title">
                                 <div class="row">
                                     <div class="col-4">
-                                        <?php
-                                            if (isset($searchresults)) {
-                                                echo '<h2>Results</h2>';
-                                            } else {
-                                                echo '<h2>All Ads</h2>';
-                                            }
-                                        ?>
-                                    </div>
-                                    <div class="col-8">
-                                        <div class="layout-switcher">
-                                            <ul>
-                                                <li>
-                                                    <div class="page-controls-sorting">
-                                                        <button class="sorting-btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Sort By<i class="fa fa-sort" aria-hidden="true"></i></button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#">Date</a>
-                                                            <a class="dropdown-item" href="#">Best Sale</a>
-                                                            <a class="dropdown-item" href="#">Rating</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <?php
-                                                //<li><a class="product-view-trigger" href="#" data-type="category-grid-layout2"><i class="fa fa-th-large"></i></a></li>
-                                                //<li class="active"><a href="#" data-type="category-list-layout2" class="product-view-trigger"><i class="fa fa-list"></i></a></li>
-                                                ?>
-                                            </ul>
-                                        </div>
+                                        <h2>Advertisements</h2>
                                     </div>
                                 </div>
                             </div>
@@ -285,44 +259,87 @@
                                                     // Include District in URL
                                                     if (isset($selectedCity)) {
                                                         // Include City in URL
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
-                                                        echo '</b></li>';
 
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$selectedCategory['category_slug'].'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
-                                                        echo '</b></li>';
-                                                    
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$selectedSubcategory['sub_category_name'].'</a>';
-                                                        echo '</b></li>';
+                                                        if (isset($term)) {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'?term='.$term.'" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
+                                                            echo '</b></li>';
+
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$selectedCategory['category_slug'].'?term='.$term.'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                        
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'?term='.$term.'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$selectedSubcategory['sub_category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                        } else {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
+                                                            echo '</b></li>';
+
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$selectedCategory['category_slug'].'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                        
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$selectedSubcategory['sub_category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                        }
                                                     } else {
                                                         // Do not Include City in URL
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
-                                                        echo '</b></li>';
+                                                        if (isset($term)) {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'?term='.$term.'" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
+                                                            echo '</b></li>';
 
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
-                                                        echo '</b></li>';
-                                                        
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$selectedSubcategory['sub_category_name'].'</a>';
-                                                        echo '</b></li>';
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'?term='.$term.'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                            
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'?term='.$term.'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$selectedSubcategory['sub_category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                        } else {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
+                                                            echo '</b></li>';
+
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                            
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$selectedSubcategory['sub_category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                        }
                                                     }
                                                 } else {
                                                     // Do not Include District in URL
-                                                    echo '<li><b>';
+                                                    if (isset($term)) {
+                                                        echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/sri-lanka?term='.$term.'" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
+                                                            echo '</b></li>';
+
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'?term='.$term.'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
+                                                        echo '</b></li>';
+                                                
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'?term='.$term.'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$selectedSubcategory['sub_category_name'].'</a>';
+                                                        echo '</b></li>';
+                                                    } else {
+                                                        echo '<li><b>';
                                                             echo '<a href="'.base_url().'/search/index/sri-lanka" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
                                                         echo '</b></li>';
 
-                                                    echo '<li><b>';
-                                                        echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
-                                                    echo '</b></li>';
-                                            
-                                                    echo '<li><b>';
-                                                        echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$selectedSubcategory['sub_category_name'].'</a>';
-                                                    echo '</b></li>';
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
+                                                        echo '</b></li>';
+                                                
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$selectedSubcategory['sub_category_name'].'</a>';
+                                                        echo '</b></li>';
+                                                    }
                                                 }
                                             } else {
                                                 if (isset($selectedDistrict)) {
@@ -330,48 +347,96 @@
                                                     // Do not Include Subcategory in URL
                                                     // Do not Include District in URL
                                                     if (isset($selectedCity)) {
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
-                                                        echo '</b></li>';
-
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$selectedCategory['category_slug'].'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
-                                                        echo '</b></li>';
-                                                        
-                                                        foreach ($subcategory as $subcat) {
+                                                        if (isset($term)) {
                                                             echo '<li><b>';
-                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$selectedCategory['category_slug'].'/'.$subcat['sub_category_slug'].'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$subcat['sub_category_name'].'</a>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'?term='.$term.'" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
                                                             echo '</b></li>';
+
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$selectedCategory['category_slug'].'?term='.$term.'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                            
+                                                            foreach ($subcategory as $subcat) {
+                                                                echo '<li><b>';
+                                                                    echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$selectedCategory['category_slug'].'/'.$subcat['sub_category_slug'].'?term='.$term.'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$subcat['sub_category_name'].'</a>';
+                                                                echo '</b></li>';
+                                                            }
+                                                        } else {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
+                                                            echo '</b></li>';
+
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$selectedCategory['category_slug'].'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                            
+                                                            foreach ($subcategory as $subcat) {
+                                                                echo '<li><b>';
+                                                                    echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$selectedCategory['category_slug'].'/'.$subcat['sub_category_slug'].'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$subcat['sub_category_name'].'</a>';
+                                                                echo '</b></li>';
+                                                            }
                                                         }
                                                     } else {
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
-                                                        echo '</b></li>';
-
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
-                                                        echo '</b></li>';
-                                                        
-                                                        foreach ($subcategory as $subcat) {
+                                                        if (isset($term)) {
                                                             echo '<li><b>';
-                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'/'.$subcat['sub_category_slug'].'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$subcat['sub_category_name'].'</a>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'?term='.$term.'" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
                                                             echo '</b></li>';
+
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'?term='.$term.'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                            
+                                                            foreach ($subcategory as $subcat) {
+                                                                echo '<li><b>';
+                                                                    echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'/'.$subcat['sub_category_slug'].'?term='.$term.'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$subcat['sub_category_name'].'</a>';
+                                                                echo '</b></li>';
+                                                            }
+                                                        } else {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
+                                                            echo '</b></li>';
+
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                            
+                                                            foreach ($subcategory as $subcat) {
+                                                                echo '<li><b>';
+                                                                    echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'/'.$subcat['sub_category_slug'].'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$subcat['sub_category_name'].'</a>';
+                                                                echo '</b></li>';
+                                                            }
                                                         }
                                                     }
                                                 } else {
                                                     // Do not Include District in URL
-                                                    echo '<li><b>';
-                                                        echo '<a href="'.base_url().'/search/index/sri-lanka" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
-                                                    echo '</b></li>';
-
-                                                    echo '<li><b>';
-                                                        echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
-                                                    echo '</b></li>';
-                                            
-                                                    foreach ($subcategory as $subcat) {
+                                                    if (isset($term)) {
                                                         echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'/'.$subcat['sub_category_slug'].'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$subcat['sub_category_name'].'</a>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka?term='.$term.'" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
                                                         echo '</b></li>';
+
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'?term='.$term.'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
+                                                        echo '</b></li>';
+                                                
+                                                        foreach ($subcategory as $subcat) {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'/'.$subcat['sub_category_slug'].'?term='.$term.'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$subcat['sub_category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                        }
+                                                    } else {
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka" style="background-color: rgba(248,100,14,0.9); color: rgba(255,255,255,1.0);">All Categories</a>';
+                                                        echo '</b></li>';
+
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'" style="background-color: rgba(248, 100, 14, 0.5); color: rgba(255,255,255,1.0);"><img src="'.base_url().'/assets/uploads/'.$selectedCategory['category_icon'].'" alt="'.$selectedCategory['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$selectedCategory['category_name'].'</a>';
+                                                        echo '</b></li>';
+                                                
+                                                        foreach ($subcategory as $subcat) {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'/'.$subcat['sub_category_slug'].'"><i class="fas fa-chevron-right" style="margin-right: 15px;"></i> '.$subcat['sub_category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                        }
                                                     }
                                                 }
                                             }
@@ -380,22 +445,40 @@
                                             if (isset($selectedDistrict)) {
                                                 if (isset($selectedCity)) {
                                                     foreach ($category as $cat) {
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$cat['category_slug'].'"><img src="'.base_url().'/assets/uploads/'.$cat['category_icon'].'" alt="'.$cat['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$cat['category_name'].'</a>';
-                                                        echo '</b></li>';
+                                                        if (isset($term)) {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$cat['category_slug'].'?term='.$term.'"><img src="'.base_url().'/assets/uploads/'.$cat['category_icon'].'" alt="'.$cat['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$cat['category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                        } else {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$cat['category_slug'].'"><img src="'.base_url().'/assets/uploads/'.$cat['category_icon'].'" alt="'.$cat['category_name'].' category service" class="img-fluid" style="width:24px;"/>'.$cat['category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                        }
                                                     }
                                                 } else {
                                                     foreach ($category as $cat) {
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$cat['category_slug'].'"><img src="'.base_url().'/assets/uploads/'.$cat['category_icon'].'" alt="'.$cat['category_name'].' category service" class="img-fluid" style="width: 24px;"/>'.$cat['category_name'].'</a>';
-                                                        echo '</b></li>';
+                                                        if (isset($term)) {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$cat['category_slug'].'?term='.$term.'"><img src="'.base_url().'/assets/uploads/'.$cat['category_icon'].'" alt="'.$cat['category_name'].' category service" class="img-fluid" style="width: 24px;"/>'.$cat['category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                        } else {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$cat['category_slug'].'"><img src="'.base_url().'/assets/uploads/'.$cat['category_icon'].'" alt="'.$cat['category_name'].' category service" class="img-fluid" style="width: 24px;"/>'.$cat['category_name'].'</a>';
+                                                            echo '</b></li>';
+                                                        }
                                                     }
                                                 }
                                             } else {
                                                 foreach ($category as $cat) {
-                                                    echo '<li><b>';
-                                                        echo '<a href="'.base_url().'/search/index/sri-lanka/'.$cat['category_slug'].'"><img src="'.base_url().'/assets/uploads/'.$cat['category_icon'].'" alt="'.$cat['category_name'].' category service" class="img-fluid" style="width: 24px;"/>'.$cat['category_name'].'</a>';
-                                                    echo '</b></li>';
+                                                    if (isset($term)) {
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$cat['category_slug'].'?term='.$term.'"><img src="'.base_url().'/assets/uploads/'.$cat['category_icon'].'" alt="'.$cat['category_name'].' category service" class="img-fluid" style="width: 24px;"/>'.$cat['category_name'].'</a>';
+                                                        echo '</b></li>';
+                                                    } else {
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$cat['category_slug'].'"><img src="'.base_url().'/assets/uploads/'.$cat['category_icon'].'" alt="'.$cat['category_name'].' category service" class="img-fluid" style="width: 24px;"/>'.$cat['category_name'].'</a>';
+                                                        echo '</b></li>';
+                                                    }
                                                 }
                                             }
                                         }
@@ -421,45 +504,87 @@
                                                     if (isset($selectedSubcategory)) {
                                                         // Category Selected
                                                         // Subcategory Selected
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">All Districts</a>';
-                                                        echo '</b></li>';
+                                                        if (isset($term)) {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'?term='.$term.'">All Districts</a>';
+                                                            echo '</b></li>';
 
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">'.ucwords($selectedDistrict).'</a>';
-                                                        echo '</b></li>';
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'?term='.$term.'">'.ucwords($selectedDistrict).'</a>';
+                                                            echo '</b></li>';
 
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCity.'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">'.ucwords($selectedCity).'</a>';
-                                                        echo '</b></li>';
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCity.'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'?term='.$term.'">'.ucwords($selectedCity).'</a>';
+                                                            echo '</b></li>';
+                                                        } else {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">All Districts</a>';
+                                                            echo '</b></li>';
+
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">'.ucwords($selectedDistrict).'</a>';
+                                                            echo '</b></li>';
+
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCity.'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">'.ucwords($selectedCity).'</a>';
+                                                            echo '</b></li>';
+                                                        }
                                                     } else {
                                                         // Category Selected
                                                         // Subcategory not Selected
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'">All Districts</a>';
-                                                        echo '</b></li>';
+                                                        if (isset($term)) {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'?term='.$term.'">All Districts</a>';
+                                                            echo '</b></li>';
 
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'">'.ucwords($selectedDistrict).'</a>';
-                                                        echo '</b></li>';
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'?term='.$term.'">'.ucwords($selectedDistrict).'</a>';
+                                                            echo '</b></li>';
 
-                                                        echo '<li><b>';
-                                                            echo '<a hreg="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$selectedCategory['category_slug'].'">'.ucwords($selectedCity).'</a>';
-                                                        echo '</b></li>';
+                                                            echo '<li><b>';
+                                                                echo '<a hreg="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$selectedCategory['category_slug'].'?term='.$term.'">'.ucwords($selectedCity).'</a>';
+                                                            echo '</b></li>';
+                                                        } else {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'">All Districts</a>';
+                                                            echo '</b></li>';
+
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'">'.ucwords($selectedDistrict).'</a>';
+                                                            echo '</b></li>';
+
+                                                            echo '<li><b>';
+                                                                echo '<a hreg="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'/'.$selectedCategory['category_slug'].'">'.ucwords($selectedCity).'</a>';
+                                                            echo '</b></li>';
+                                                        }
                                                     }
                                                 } else {
                                                     // Category Not Selected
-                                                    echo '<li><b>';
-                                                        echo '<a href="'.base_url().'/search/index/sri-lanka">All Districts</a>';
-                                                    echo '</b></li>';
+                                                    if (isset($term)) {
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka?term='.$term.'">All Districts</a>';
+                                                        echo '</b></li>';
 
-                                                    echo '<li><b>';
-                                                        echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'">'.ucwords($selectedDistrict).'</a>';
-                                                    echo '</b></li>';
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'?term='.$term.'">'.ucwords($selectedDistrict).'</a>';
+                                                        echo '</b></li>';
 
-                                                    echo '<li><b>';
-                                                        echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'">'.ucwords($selectedCity).'</a>';
-                                                    echo '</b></li>';
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'?term='.$term.'">'.ucwords($selectedCity).'</a>';
+                                                        echo '</b></li>';
+                                                    } else {
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka">All Districts</a>';
+                                                        echo '</b></li>';
+
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'">'.ucwords($selectedDistrict).'</a>';
+                                                        echo '</b></li>';
+
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($selectedCity).'">'.ucwords($selectedCity).'</a>';
+                                                        echo '</b></li>';
+                                                    }
                                                 }
                                             } else {
                                                 // District Selected
@@ -468,51 +593,99 @@
                                                     if (isset($selectedSubcategory)) {
                                                         // Category Selected
                                                         // Subcategory Selected
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">All Districts</a>';
-                                                        echo '</b></li>';
-
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">'.ucwords($selectedDistrict).'</a>';
-                                                        echo '</b></li>';
-
-                                                        foreach ($city as $c) {
+                                                        if (isset($term)) {
                                                             echo '<li><b>';
-                                                                echo '<a href="'.base_url().'/search/index/'.strtowlower($selectedDistrict).'/'.strtolower($c['city']).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">'.ucwords($c['city']).'</a>';
+                                                                echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'?term='.$term.'">All Districts</a>';
                                                             echo '</b></li>';
+
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'?term='.$term.'">'.ucwords($selectedDistrict).'</a>';
+                                                            echo '</b></li>';
+
+                                                            foreach ($city as $c) {
+                                                                echo '<li><b>';
+                                                                    echo '<a href="'.base_url().'/search/index/'.strtowlower($selectedDistrict).'/'.strtolower($c['city']).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'?term='.$term.'">'.ucwords($c['city']).'</a>';
+                                                                echo '</b></li>';
+                                                            }
+                                                        } else {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">All Districts</a>';
+                                                            echo '</b></li>';
+
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">'.ucwords($selectedDistrict).'</a>';
+                                                            echo '</b></li>';
+
+                                                            foreach ($city as $c) {
+                                                                echo '<li><b>';
+                                                                    echo '<a href="'.base_url().'/search/index/'.strtowlower($selectedDistrict).'/'.strtolower($c['city']).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">'.ucwords($c['city']).'</a>';
+                                                                echo '</b></li>';
+                                                            }
                                                         }
 
                                                     } else {
                                                         // Category Selected
                                                         // Subcategory not Selected
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'">All Districts</a>';
-                                                        echo '</b></li>';
-
-                                                        echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'">'.ucwords($selectedDistrict).'</a>';
-                                                        echo '</b></li>';
-
-                                                        foreach ($city as $c) {
+                                                        if (isset($term)) {
                                                             echo '<li><b>';
-                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($c['city']).'/'.$selectedCategory['category_slug'].'">'.ucwords($c['city']).'</a>';
+                                                                echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'?term='.$term.'">All Districts</a>';
                                                             echo '</b></li>';
+
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'?term='.$term.'">'.ucwords($selectedDistrict).'</a>';
+                                                            echo '</b></li>';
+
+                                                            foreach ($city as $c) {
+                                                                echo '<li><b>';
+                                                                    echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($c['city']).'/'.$selectedCategory['category_slug'].'?term='.$term.'">'.ucwords($c['city']).'</a>';
+                                                                echo '</b></li>';
+                                                            }
+                                                        } else {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'">All Districts</a>';
+                                                            echo '</b></li>';
+
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.$selectedCategory['category_slug'].'">'.ucwords($selectedDistrict).'</a>';
+                                                            echo '</b></li>';
+
+                                                            foreach ($city as $c) {
+                                                                echo '<li><b>';
+                                                                    echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($c['city']).'/'.$selectedCategory['category_slug'].'">'.ucwords($c['city']).'</a>';
+                                                                echo '</b></li>';
+                                                            }
                                                         }
                                                     }
                                                 } else {
                                                     // Category not Selected
-                                                    echo '<li><b>';
-                                                        echo '<a href="'.base_url().'/search/index/sri-lanka">All Districts</a>';
-                                                    echo '</b></li>';
-
-                                                    echo '<li><b>';
-                                                        echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'">'.ucwords($selectedDistrict).'</a>';
-                                                    echo '</b></li>';
-
-                                                    foreach ($city as $c) {
+                                                    if (isset($term)) {
                                                         echo '<li><b>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($c['city']).'">'.ucwords($c['city']).'</a>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka?term='.$term.'">All Districts</a>';
                                                         echo '</b></li>';
+
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'?term='.$term.'">'.ucwords($selectedDistrict).'</a>';
+                                                        echo '</b></li>';
+
+                                                        foreach ($city as $c) {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($c['city']).'?term='.$term.'">'.ucwords($c['city']).'</a>';
+                                                            echo '</b></li>';
+                                                        }
+                                                    } else {
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka">All Districts</a>';
+                                                        echo '</b></li>';
+
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'">'.ucwords($selectedDistrict).'</a>';
+                                                        echo '</b></li>';
+
+                                                        foreach ($city as $c) {
+                                                            echo '<li><b>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($c['city']).'">'.ucwords($c['city']).'</a>';
+                                                            echo '</b></li>';
+                                                        }
                                                     }
                                                 }
                                             }
@@ -523,39 +696,75 @@
                                                 if (isset($selectedSubcategory)) {
                                                     // Category Selected
                                                     // Subcategory Selected
-                                                    echo '<li><b>';
-                                                        echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">All Districts</a>';
-                                                    echo '</b></li>';
+                                                    if (isset($term)) {
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'?term='.$term.'">All Districts</a>';
+                                                        echo '</b></li>';
 
-                                                    foreach ($district as $dist) {
-                                                        echo '<li>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($dist).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">'.ucwords($dist).'</a>';
-                                                        echo '</li>';
+                                                        foreach ($district as $dist) {
+                                                            echo '<li>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($dist).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'?term='.$term.'">'.ucwords($dist).'</a>';
+                                                            echo '</li>';
+                                                        }
+                                                    } else {
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">All Districts</a>';
+                                                        echo '</b></li>';
+
+                                                        foreach ($district as $dist) {
+                                                            echo '<li>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($dist).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">'.ucwords($dist).'</a>';
+                                                            echo '</li>';
+                                                        }
                                                     }
                                                 } else {
                                                     // Category Selected
                                                     // Subcategory not Selected
-                                                    echo '<li><b>';
-                                                        echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'">All Districts</a>';
-                                                    echo '</b></li>';
+                                                    if (isset($term)) {
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'?term='.$term.'">All Districts</a>';
+                                                        echo '</b></li>';
 
-                                                    foreach ($district as $dist) {
-                                                        echo '<li>';
-                                                            echo '<a href="'.base_url().'/search/index/'.strtolower($dist).'/'.$selectedCategory['category_slug'].'">'.ucwords($dist).'</a>';
-                                                        echo '</li>';
+                                                        foreach ($district as $dist) {
+                                                            echo '<li>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($dist).'/'.$selectedCategory['category_slug'].'?term='.$term.'">'.ucwords($dist).'</a>';
+                                                            echo '</li>';
+                                                        }
+                                                    } else {
+                                                        echo '<li><b>';
+                                                            echo '<a href="'.base_url().'/search/index/sri-lanka/'.$selectedCategory['category_slug'].'">All Districts</a>';
+                                                        echo '</b></li>';
+
+                                                        foreach ($district as $dist) {
+                                                            echo '<li>';
+                                                                echo '<a href="'.base_url().'/search/index/'.strtolower($dist).'/'.$selectedCategory['category_slug'].'">'.ucwords($dist).'</a>';
+                                                            echo '</li>';
+                                                        }
                                                     }
                                                 }
                                             } else {
                                                 // Category not Selected
                                                 // Subcategory not Selected
-                                                echo '<li><b>';
-                                                    echo '<a href="'.base_url().'/search/index/sri-lanka">All Districts</a>';
-                                                echo '</b></li>';
+                                                if (isset($term)) {
+                                                    echo '<li><b>';
+                                                        echo '<a href="'.base_url().'/search/index/sri-lanka?term='.$term.'">All Districts</a>';
+                                                    echo '</b></li>';
 
-                                                foreach ($district as $dist) {
-                                                    echo '<li>';
-                                                        echo '<a href="'.base_url().'/search/index/'.$dist.'">'.ucwords($dist).'</a>';
-                                                    echo '</li>';
+                                                    foreach ($district as $dist) {
+                                                        echo '<li>';
+                                                            echo '<a href="'.base_url().'/search/index/'.$dist.'?term='.$term.'">'.ucwords($dist).'</a>';
+                                                        echo '</li>';
+                                                    }
+                                                } else {
+                                                    echo '<li><b>';
+                                                        echo '<a href="'.base_url().'/search/index/sri-lanka">All Districts</a>';
+                                                    echo '</b></li>';
+
+                                                    foreach ($district as $dist) {
+                                                        echo '<li>';
+                                                            echo '<a href="'.base_url().'/search/index/'.$dist.'">'.ucwords($dist).'</a>';
+                                                        echo '</li>';
+                                                    }
                                                 }
                                             }
                                         }

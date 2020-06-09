@@ -8,6 +8,7 @@ use App\Models\CustomerModel;
 use App\Models\AdvertisementModel;
 use App\Models\UserModel;
 use App\Models\MediaModel;
+use App\Models\SubscribeModel;
 
 class Home extends BaseController
 {
@@ -19,8 +20,8 @@ class Home extends BaseController
 		$seo['admin'] = false;
 		
 		session()->start();
+		helper(['form', 'url']);
 
-		// Check if Parameter 1 is set
 		if ($param != null) {
 			$modelAdvertisement = new AdvertisementModel();
 			// If Parameter 1 is set, check if it is a advertisement
@@ -114,6 +115,25 @@ class Home extends BaseController
 		}
 	}
 
-	//--------------------------------------------------------------------
+	public function subscribe() {
+		// Check if Parameter 1 is set
+		if ($this->request->getVar('email')) {
+			$email = $this->request->getVar('email');
+			$modelSubscribe = new SubscribeModel();
+
+			$exists = $modelSubscribe->where('email',$email)->first();
+
+			if ($exists == null) {
+				$data = ['email' => $this->request->getVar('email')];
+				$save = $modelSubscribe->insert($data);
+					
+				if ($save) {
+					echo 'Successfully Subscribed to Newsletters';
+				}
+			} else {
+				echo 'Already Subscribed to Newsletters';
+			}
+        }
+	}
 
 }

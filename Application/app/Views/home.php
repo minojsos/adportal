@@ -129,11 +129,15 @@
                 <h2 class="size-lg">Subscribe to Newsletter</h2>
                 <p>Stay in touch with us to receive the latest news about our services</p>
             </div>
-            <div class="input-group subscribe-area">
-                <input type="email" placeholder="Type your e-mail address" class="form-control" name="email" id="email">
-                <span class="input-group-addon">
-                    <button type="submit" class="cp-default-btn-xl">Subscribe</button>                        
-                </span>
+            <div id="subscribe-box">
+                <form id="subscribe">
+                    <div class="input-group subscribe-area">
+                        <input type="email" placeholder="Type your e-mail address" class="form-control" name="email" id="email">
+                        <span class="input-group-addon">
+                            <button type="submit" class="cp-default-btn-xl">Subscribe</button>                        
+                        </span>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
@@ -294,6 +298,69 @@
             $(this).attr('action', url);
         }
     });
+
+    // Variable to hold request
+    var request;
+    
+    $('#subscribe').submit(function(event) {
+
+        event.preventDefault();
+
+        // Abort any pending request
+        if (request) {
+            request.abort();
+        }
+        // setup some local variables
+        var $form = $(this);
+
+        // Let's select and cache all the fields
+        var $inputs = $form.find("input, select, button, textarea");
+
+        // Serialize the data in the form
+        var serializedData = $form.serialize();
+
+        // Let's disable the inputs for the duration of the Ajax request.
+        // Note: we disable elements AFTER the form data has been serialized.
+        // Disabled form elements will not be serialized.
+        $inputs.prop("disabled", true);
+
+        // Fire off the request to /form.php
+        request = $.ajax({
+            url: "<?php echo base_url(); ?>/home/subscribe",
+            type: "post",
+            data: serializedData
+        });
+
+        // Callback handler that will be called on success
+        request.done(function (response, textStatus, jqXHR){
+            // Log a message to the console
+            document.getElementById("subscribe-box").innerHTML = "<h4 style='text-align:center;font-family:'Poppins',sans-serif;color:rgba(255,255,255,1.0);font-weight:600;'>"+response+"</h4>";
+        });
+
+        // Callback handler that will be called on failure
+        request.fail(function (jqXHR, textStatus, errorThrown){
+            // Log the error to the console
+            console.error(
+                "The following error occurred: "+
+                textStatus, errorThrown
+            );
+        });
+
+        // Callback handler that will be called regardless
+        // if the request failed or succeeded
+        request.always(function () {
+            // Reenable the inputs
+            $inputs.prop("disabled", false);
+        });
+    });
+
+    $('.popup-close').click(function(e) {
+        $('.popup-wrap').fadeOut(500);
+        $('.popup-box').removeClass('transform-in').addClass('transform-out');
+
+        e.preventDefault();
+    });
+    
 </script>
 </body>
 </html>

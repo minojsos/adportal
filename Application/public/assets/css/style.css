@@ -924,3 +924,32 @@ Advertisement Card
       width: 30px;
     }
 }
+
+/** Media **/
+.media-img {
+    border: 1px solid rgba(220,220,220,1.0);
+    padding: 10px;
+    text-align: center;
+}
+
+.media-img .content {
+    padding-top: 10px;
+}
+
+.media-img .content .title {
+    font-family: 'Lato',sans-serif;
+    font-weight: 300;
+    font-size: 0.9em;
+}
+
+.media-img .content .icons {
+    padding-top: 10px;
+}
+
+.media-img .content .icons a {
+    color: #f8640e!important;
+}
+
+.media-img .content .icons a i {
+    color: #f8640e!important;
+}
