@@ -15,46 +15,40 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="customer/create" class="btn btn-orange" alt="Create Customers">Add New</a>
+                            <a href="subscriber/export" class="btn btn-orange" alt="Create Location">Export</a>
                         </div>
                     </div>
                     <br />
 
                     <div class="row">
                         <div class="col-md-12">
-                            <h3><i class="fas fa-ad"></i> All Customers</h3>
+                            <h3><i class="fas fa-list-alt"></i> All Subscribers</h3>
                             <br />
                             <?php
-                                if ($customer) {
-                                    echo '<table class="table table-striped table-bordered" id="customers">';
+                                if ($subscriber) {
+                                    echo '<table class="table table-striped table-bordered" id="locationTable">';
                                         echo '<thead>';
                                             echo '<tr>';
                                                 echo '<th>ID</th>';
-                                                echo '<th>Full Name</th>';
                                                 echo '<th>Email</th>';
-                                                echo '<th>Phone</th>';
-                                                echo '<th>Edit</th>';
                                                 echo '<th>Delete</th>';
                                             echo '</tr>';
-                                        echo '<thead>';
+                                        echo '</thead>';
 
                                         echo '<tbody>';
-                                            foreach($customer as $custObj) {
-                                              echo '<tr>';
-                                                  echo '<td>'.$custObj['id'].'</td>';
-                                                  echo '<td>'.$custObj['fname'].' '.$custObj['lname'].'</td>';
-                                                  echo '<td>'.$custObj['email'].'</td>';
-                                                  echo '<td>'.$custObj['contact_no'].'</td>';
-                                                  echo '<td><a class="a-orange" href="'.base_url().'/customer/edit/'.$custObj['id'].'" alt="Edit User - '.$custObj['email'].'">Edit<a/></td>';
-                                                  echo '<td><a class="a-orange" href="'.base_url().'/customer/edit/'.$custObj['id'].'" alt="Delete User - '.$custObj['email'].'">Delete<a/></td>';
-                                              echo '</tr>';
+                                            foreach ($subscriber as $sub) {
+                                                echo '<tr>';
+                                                    echo '<td>'.$sub['id'].'</td>';
+                                                    echo '<td>'.$sub['email'].'</td>';
+                                                    echo '<td><a class="a-orange" href="'.base_url().'/subscriber/delete/'.$sub['id'].'" alt="Delete Subscriber - '.$sub['email'].'"><i class="far fa-trash-alt"></i></a></td>';
+                                                echo '</tr>';
                                             }
                                         echo '</tbody>';
                                     echo '</table>';
                                 } else {
-                                  echo '<div class="col-md-12">';
-                                      echo '<div class="alert alert-warning" role="alert">';
-                                            echo 'No Customers Found!';
+                                    echo '<div class="col-md-12">';
+                                        echo '<div class="alert alert-warning" role="alert">';
+                                            echo 'No Subscribers Found!';
                                         echo '</div>';
                                     echo '</div>';
                                 }
@@ -105,11 +99,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
     <script src="https://kit.fontawesome.com/cdee1294ee.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script> 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(document).ready( function () {
-            $('#customers').DataTable();
+            $('#locationTable').DataTable();
         } );
     </script>
 </body>

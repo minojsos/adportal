@@ -12,7 +12,7 @@ use App\Models\CustomerModel;
  
 class Advertisement extends Controller
 {
-
+    
     /**
      * Index Page for Advertisements.
      * Retrieve all Advertisements, Users, Cateogires and SubCategories so tha thte page to display advertisements can be generated.
@@ -49,6 +49,93 @@ class Advertisement extends Controller
 
         return redirect()->to(base_url('login'));
     }    
+
+    /**
+     * Activate an inactive/deactivated advertisement.
+     * Only the Administrator can activate an inactive/deactivated advertisement.
+     * The Advertismeent should already be inactive/deactivated to be able to activate it.
+     * If Successfully activated, show success message else show error message.
+     */
+    public function activate($ad_id=null) {
+        session()->start();
+
+        if (isset($_SESSION)) {
+            if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && session()->get('privilege') == 1) {
+                $modelAdvertisement = new AdvertisementModel();
+
+                $advertisement = $modelAdvertisement->where(['id'=>$ad_id, 'status'=>0])->find();
+                if($advertisement != NULL) {
+                    $data = [
+                        'status' => 1,
+                    ];
+                    $save = $modelAdvertisement->update($ad_id,$data);
+
+                    if ($save) {
+                        return redirect()->to(base_url('advertisement'))->with('msg','Successfully Activated Advertisement');
+                    }
+
+                    return redirect()->to(base_url('advertisement'))->with('error','Failed to Activate Advertisement');
+                }
+            }
+        }
+
+        return redirect()->to(base_url('login'));
+    }
+
+    /**
+     * Deactivate an Active Advertisement
+     * Only the Administrator can deactive an active advertisement.
+     * The Advertisement should already be active to be able to deactive it.
+     * If Successfully deactivated, show success message else show error message.
+     */
+    public function deactivate($ad_id = null) {
+        session()->start();
+
+        if (isset($_SESSION)) {
+            if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && session()->get('privilege') == 1) {
+                $modelAdvertisement = new AdvertisementModel();
+
+                $advertisement = $modelAdvertisement->where(['id'=>$ad_id, 'status'=>1])->find();
+                if ($advertisement != NULL) {
+                    $data = [
+                        'status' => 0,
+                    ];
+
+                    $save = $modelAdvertisement->update($ad_id,$data);
+
+                    if ($save) {
+                        return redirect()->to(base_url('advertisement'))->with('msg','Successfully Deactivated Advertisement');
+                    }
+
+                    return redirect()->to(base_url('advertisement'))->with('error','Failed to Deactivate Advertisement');
+                }
+            }
+        }
+
+        return redirect()->to(base_url('login'));
+    }
+
+    /**
+     * Renew an advertisement.
+     * If the advertisement has been expired, it can be renewed.
+     * Administrator or Poster can do the renewel.
+     */
+    public function renew($ad_id = null) {
+        session()->start();
+
+        if (isset($_SESSION)) {
+            if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true) {
+                $modelAdvertisement = new AdvertisementModel();
+
+                $advertisement = $modelAdvertisement->where('id',$ad_id)->find();
+                if ($advertisement != NULL) {
+                    // Load Renew Advertisement Page
+                }
+            }
+        }
+
+        return redirect()->to(base_url('login'));
+    }
     
     /**
      * Create New Advertisements.
@@ -131,7 +218,7 @@ class Advertisement extends Controller
 
                 // Location
                 $modelLocation = new LocationModel();
-                $data['location'] = $modelLocation->orderBy('city','ASC')->findAll();
+                $data['location'] = $modelLocation->orderBy('district','ASC')->findAll();
                 $districts=array();
                 foreach ($data['location'] as $loc) {
                     if (!in_array($loc['district'], $districts)) {
@@ -257,8 +344,6 @@ class Advertisement extends Controller
                 $urlFromTitle = url_title($this->request->getVar('title'), '-', true);
                 $length = 10;
                 $slug = $urlFromTitle.'-'.substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
-                echo '<h1>'.$urlFromTitle.'</h1>';
-                echo '<h1>'.$slug.'</h1>';
 
                 // Load Advertisement Data from Form
                 $data = [
@@ -269,7 +354,7 @@ class Advertisement extends Controller
                     'end_date' => $this->request->getVar('end_date'),
                     'status' => $status,
                     'title' => $this->request->getVar('title'),
-                    'slug' => $slug,
+                    'slug' => strval($slug),
                     'description' => $this->request->getVar('description'),
                     'price' => $this->request->getVar('price'),
                     'negotiable' => $negotiate,
@@ -335,7 +420,7 @@ class Advertisement extends Controller
                     }
 
                     if (!empty($this->request->getVar('img_three_title')) && !empty($this->request->getVar('img_three_alt_text'))) {
-                        $imgTwo = $this->request->getFile('img_three');
+                        $imgThree = $this->request->getFile('img_three');
                         $fileName = $imgTwo->getRandomName();
                         $imgThree->move(ROOTPATH . 'public/assets/uploads', $fileName);
 
@@ -352,7 +437,7 @@ class Advertisement extends Controller
                     }
 
                     if (!empty($this->request->getVar('img_four_title')) && !empty($this->request->getVar('img_four_alt_text'))) {
-                        $imgTwo = $this->request->getFile('img_four');
+                        $imgFour = $this->request->getFile('img_four');
                         $fileName = $imgTwo->getRandomName();
                         $imgFour->move(ROOTPATH . 'public/assets/uploads', $fileName);
 
@@ -367,61 +452,126 @@ class Advertisement extends Controller
 
                         $save = $mediaModel->insert($data);
                     }
-
-                    // if (!empty($this->request->getFile('img_two')) && !empty($_FILES['userfile']['img_two'])) {
-                    //     $imgTwo = $this->request->getFile('img_two');
-                    //     $fileName = $imgTwo->getRandomName();
-                    //     $imgTwo->move(ROOTPATH . 'public/assets/uploads', $fileName);
-
-                    //     $data = [
-                    //         'title' => $this->request->getVar('img_two_title'),
-                    //         'alt' => $this->request->getVar('img_two_alt_text'),
-                    //         'path' => $fileName,
-                    //         'featured' => 0,
-                    //         'user_id' => $_SESSION['id'],
-                    //         'ad_id' => $inserted_id,
-                    //     ];
-
-                    //     $save = $mediaModel->insert($data);
-                    // }
-
-                    // if (!empty($this->request->getFile('img_three')) && !empty($_FILES['userfile']['img_three'])) {
-                    //     $imgThree = $this->request->getFile('img_three');
-                    //     $fileName = $imgThree->getRandomName();
-                    //     $imgThree->move(ROOTPATH . 'public/assets/uploads', $fileName);
-
-                    //     $data = [
-                    //         'title' => $this->request->getVar('img_three_title'),
-                    //         'alt' => $this->request->getVar('img_three_alt_text'),
-                    //         'path' => $fileName,
-                    //         'featured' => 0,
-                    //         'user_id' => $_SESSION['id'],
-                    //         'ad_id' => $inserted_id,
-                    //     ];
-
-                    //     $save = $mediaModel->insert($data);
-                    // }
-
-                    // if (!empty($this->request->getFile('img_four')) && !empty($_FILES['userfile']['img_four'])) {
-                    //     $imgFour = $this->request->getFile('img_four');
-                    //     $fileName = $imgFour->getRandomName();
-                    //     $imgFour->move(ROOTPATH . 'public/assets/uploads', $fileName);
-
-                    //     $data = [
-                    //         'title' => $this->request->getVar('img_four_title'),
-                    //         'alt' => $this->request->getVar('img_four_alt_text'),
-                    //         'path' => $fileName,
-                    //         'featured' => 0,
-                    //         'user_id' => $_SESSION['id'],
-                    //         'ad_id' => $inserted_id,
-                    //     ];
-
-                    //     $save = $mediaModel->insert($data);
-                    // }
                     
                 }
 
                 return redirect()->to(base_url('advertisement/create'))->with('msg','Successfully Saved Advertisement');
+            }
+        }
+
+        return redirect()->to(base_url('login'));
+    }
+
+    /**
+     * Edit Page for editing an existing advertisement.
+     * The page provides a form to edit an existing advertisement.
+     * Given the Advertisement ID, retrieve the advertisement details and pass it to Edit Advertisement Page.
+     */
+    public function edit($ad_id = null)
+    {
+        $modelSetting = new SettingModel();
+        $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
+        $seo['title'] = 'Advertisements';
+        $seo['admin'] = true;
+
+        session()->start();
+
+        if (isset($_SESSION)) {
+            if (isset($_SESSION['isLoggedIn']) && ($_SESSION['isLoggedIn'] == true)) {
+                $model = new AdvertisementModel();
+                $modelCategory = new CategoryModel();
+                $modelSubCategory = new SubcategoryModel();
+                $modelLocation = new LocationModel();
+                $modelUser = new UserModel();
+
+                $advertisements = $model->where('id', $ad_id)->orderby('id', 'ASC')->findAll();
+                
+                foreach ($advertisements as $advertisement) {
+                    $data['advertisement'] = $advertisement;
+                }
+                
+                if ($data['advertisement'] != NULL) {
+                    // Retrieve Categories
+                    $data['category'] = $modelCategory->orderBy('category_name','ASC')->findAll();
+                    // Retrieve Subcategories
+                    $data['subcategory'] = $modelSubCategory->orderBy('sub_category_name','ASC')->findAll();
+                    // Retrieve All Locations
+                    $data['location'] = $modelLocation->orderBy('city','ASC')->findAll();
+                    // Obtain Districts
+                    $districts=array();
+                    foreach ($data['location'] as $loc) {
+                        if (!in_array($loc['district'], $districts)) {
+                            $districts[] = $loc['district'];
+                        }
+                    }
+                    $data['district']=$districts;
+
+                    $selectedLocation = $modelLocation->where('id',$data['advertisement']['location'])->first();
+
+                    // Selected District
+                    $data['selectedDistrict'] = $selectedLocation['district'];
+                    // Selected Location
+                    $data['selectedLocation'] = $selectedLocation['city'];
+
+                    // Selected Category
+                    $data['selectedCategory'] = $data['advertisement']['cat_id'];
+
+                    echo view('Templates/Header',$seo);
+                    echo view('Templates/Navigation');
+                    return view('edit-advertisement',$data);
+                }
+            }
+        }
+
+        return redirect()->to(base_url('login'));
+    }
+
+    /**
+     * Update an Existing Advertisement.
+     * When an existing advertisement is updated, update an existing advertisement in the database.
+     * The details of the advertisement is updated.
+     */
+    public function update()
+    {
+        $modelSetting = new SettingModel();
+        $seo['settings'] = $modelSetting->orderBy('id', 'ASC')->findAll();
+        $seo['title'] = 'Advertisements';
+        $seo['admin'] = true;
+
+        session()->start();
+
+        if (isset($_SESSION)) {
+            if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && $_SESSION['privilege'] == 1) {
+                helper(['form', 'url']);  
+                $modelAdvertisement = new AdvertisementModel();
+                $ad_id = $this->request->getVar('advertisement_id');
+
+                // 1 = Negotiable | 0 = Not Negotiable
+                $negotiate = $this->request->getVar('negotiate');
+                if ($negotiate == null) {
+                    $negotiate = 0;
+                } else {
+                    $negotiate = 1;
+                }
+
+                $urlFromTitle = url_title($this->request->getVar('title'), '-', true);
+                $length = 10;
+                $slug = $urlFromTitle.'-'.substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
+
+                $data = [
+                    'cat_id' => $this->request->getVar('category'),
+                    'subcat_id' => $this->request->getVar('subcategory'),
+                    'end_date' => $this->request->getVar('end_date'),
+                    'title' => $this->request->getVar('title'),
+                    'slug' => $slug,
+                    'description' => $this->request->getVar('description'),
+                    'price' => $this->request->getVar('price'),
+                    'negotiate' => $negotiate,
+                    'location' => $this->request->getVar('location')
+                ];
+
+                $save = $modelAdvertisement->update($ad_id,$data);
+                return redirect()->to(base_url('advertisement'))->with('msg','Successfully Updated Advertisement');
             }
         }
 

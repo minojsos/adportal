@@ -235,7 +235,7 @@
 
                                 <div class="col-4">
                                     <div class="form-group">
-                                    <input class="form-check-input" type="checkbox" value="" id="negotiate" id="negotiate">
+                                    <input class="form-check-input" type="checkbox" value="" id="negotiate" name="negotiate">
                                     <label class="form-check-label" for="negotiate">
                                         Negotiate
                                     </label>
@@ -382,7 +382,7 @@
 <footer class="bg-blue">
     <div class="row">
         <div class="col-md-4">
-            <img src="https://w.ikman-st.com/dist/img/ikman/all/logos/header-33e2ba1f.png" alt="Ad Portal"/>
+            <img src="<?php echo base_url(); ?>/assets/images/logo final 3-3.png" alt="Beluxa Advertisement Portal" style="width:156px;"/>
             <p style="font-weight: 400;"><br>125A, Main Street,<br>Colombo,<br>Sri Lanka</p>
             <p style="font-weight: 400; font-size: 0.75em;">&copy; <?php echo date('Y'); ?>. Developed by <a href="http://zenolk.com" alt="Zeno Innovations (Pvt) Ltd">Zeno Innovations</a>.</p>
         </div>
@@ -508,6 +508,7 @@
             document.getElementById(next).style.display="block";
         }
     }
+    
     // Add TinyMCE to Description
     tinymce.init({
       selector: '#description',

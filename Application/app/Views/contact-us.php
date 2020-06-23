@@ -1,19 +1,6 @@
 <div id="wrapper">
-    <!-- CONTENT -->
-    <!-- Map Area Start Here -->
-    <section class="map-layout1 fixed-menu-mt full-width-container" style="background-image: url('<?php echo base_url(); ?>/assets/images/banner.jpg');background-size:cover;background-attachment:fixed;background-position:center center;">
-        <div class="container-fluid" style="padding-left:0px!important;padding-right:0px!important;">
-            <div class="google-map-area">
-                <div id="googleMap" style="background-color: rgba(0,0,0,0.5); width: 100%; height: 400px; position: relative; overflow: hidden;">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Map Area End Here -->
     <!-- Search Area Start Here -->
-    <section class="search-layout2 bg-accent">
-        <div class="search-layout2-holder">
+    <section class="search-layout1 bg-body full-width-border-bottom fixed-menu-mt">
             <div class="container">
                 <form name="search" accept-charset="utf-8" id="cp-search-form" class="bg-body search-layout2-inner" method="POST">
                     <div class="row">
@@ -31,10 +18,10 @@
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                             <div class="form-group search-input-area input-icon-category">
-                                <select id="categories" class="select2" name="category" id="category">
+                                <select id="categories" class="select2" name="categories">
                                     <option class="first" value="">All Categories</option>
                                     <?php
-                                        foreach($category as $cat) {
+                                        foreach($categories as $cat) {
                                             echo '<option value="'.$cat['category_slug'].'">'.$cat['category_name'].'</option>';
                                         }
                                     ?>
@@ -52,98 +39,96 @@
                     </div>
                 </form>
             </div>
-        </div>
-    </section>
-
-    <!-- Service Area Start Here -->
-    <section class="service-layout1 bg-accent s-space-custom3">
-        <div class="container">
-            <div class="section-title-dark">
-                <h2>Browse Our Categories</h2>
+        </section>
+        <!-- Search Area End Here -->
+        <!-- Contact Area Start Here -->
+        <section class="s-space-bottom-full bg-accent-shadow-body">
+            <div class="container">
+                <div class="breadcrumbs-area">
+                    <ul>
+                        <li><a href="#">Home</a> -</li>
+                        <li class="active">Contact Page</li>
+                    </ul>
+                </div>
             </div>
-            <div class="row">
-                <?php
-                    foreach ($category as $cat) {
-                        echo '<div class="col-lg-3 col-md-6 col-sm-6 col-12 item-mb">';
-                            echo '<div class="service-box1 bg-body text-center">';
-                                echo '<img src="'.base_url().'/assets/uploads/'.$cat['category_icon'].'" alt="'.$cat['category_name'].' category service" class="img-fluid" style="width: 64px;">';;
-                                echo '<h3 class="title-medium-dark mb-none" style="font-size:16px!important;">';
-                                    echo '<a href="'.base_url().'/search/index/sri-lanka/'.$cat['category_slug'].'">'.$cat['category_name'].'</a>';
-                                echo '</h3>';
-                                foreach ($count as $c) {
-                                    if ($c['id'] == $cat['id']) {
-                                        echo '<div class="view">('.number_format($c['count']).')</div>';
-                                        break;
-                                    }
-                                }
-                            echo '</div>';
-                        echo '</div>';
-                    }
-                ?>
-            </div>
-        </div>
-    </section>
-    <!-- Service Area End Here -->
-    <!-- Selling Process Area Start Here -->
-    <section class="bg-white s-space-regular">
-        <div class="container">
-            <div class="section-title-dark">
-                <h2>How To Start Selling Your Products</h2>
-                <p>We post your advertisement to allow you to grow your business.</p>
-            </div>
-            <ul class="process-area">
-                <li>
-                    <img src="<?php echo base_url(); ?>/assets/images/step1ad.png" alt="process" class="img-fluid cstm-img-step">
-                    <h3>Send Your Advertisement</h3>
-                    <p> Get in touch with us and send us the details of the products & services that you sell.</p>
-                </li>
-                <li>
-                    <img src="<?php echo base_url(); ?>/assets/images/step2ad.png" alt="process" class="img-fluid cstm-img-step">
-                    <h3>We Post It</h3>
-                    <p> Our expert team will compile the detail provided by you and post the advertisement.</p>
-                </li>
-                <li>
-                    <img src="<?php echo base_url(); ?>/assets/images/step3ad.png" alt="process" class="img-fluid cstm-img-step">
-                    <h3>You Start Selling</h3>
-                    <p> Your advertisements will reach more people allowing you to sell faster and grow.</p>
-                </li>
-            </ul>
-        </div>
-    </section>
-    <!-- Selling Process Area End Here -->
-
-    <!-- Start Selling & Get In Touch Area Start Here -->
-    <section class="bg-accent s-space-regular">
-        <div class="container">
-            <div class="text-center item-mt item-mb">
-                <h2 class="title-bold-dark mb-none">Do you have Something to Sell?</h2>
-                <p>Get in touch with us to get your advertisement on our website.</p>
-                <a href="<?php echo base_url().'/contact-us'; ?>" class="cp-default-btn direction-img">Contact Us!</a>
-            </div>
-        </div>
-    </section>
-    <!-- Start Selling & Get In Touch Area End Here -->
-
-    <!-- Subscribe Area Start Here -->
-    <section class="bg-primary s-space full-width-border-top">
-        <div class="container">
-            <div class="section-title-light">
-                <h2 class="size-lg">Subscribe to Newsletter</h2>
-                <p>Stay in touch with us to receive the latest news about our services</p>
-            </div>
-            <div id="subscribe-box">
-                <form id="subscribe">
-                    <div class="input-group subscribe-area">
-                        <input type="email" placeholder="Type your e-mail address" class="form-control" name="email" id="email">
-                        <span class="input-group-addon">
-                            <button type="submit" class="cp-default-btn-xl">Subscribe</button>                        
-                        </span>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 col-12">
+                        <div class="gradient-wrapper mb--sm">
+                            <div class="gradient-title">
+                                <h2>Contact With us</h2>
+                            </div>
+                            <div class="contact-layout1 gradient-padding">
+                                <div class="google-map-area">
+                                    <div id="googleMap" style="width:100%; height:400px;"></div>
+                                </div>
+                                <p>If you did not find the answer to your question or problem, please get in touch with us using the form below and we will respond to your message as soon as possible.</p>
+                                <form id="contact-form" class="contact-form" action="<?php echo base_url(); ?>/Contact" method="POST">
+                                    <fieldset>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <input type="text" placeholder="Your Name" class="form-control" name="name" id="form-name" data-error="Name field is required" required>
+                                                    <div class="help-block with-errors" style="color:#e74c3c;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <input type="email" placeholder="Your E-mail" class="form-control" name="email" id="form-email" data-error="Email field is required" required>
+                                                    <div class="help-block with-errors" style="color:#e74c3c;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <input type="text" placeholder="Subject" class="form-control" name="subject" id="form-subject" data-error="Subject field is required" required>
+                                                    <div class="help-block with-errors" style="color:#e74c3c;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <textarea placeholder="Message" class="textarea form-control" name="message" id="form-message" rows="7" cols="20" data-error="Message field is required" required></textarea>
+                                                    <div class="help-block with-errors" style="color:#e74c3c;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <button type="submit" class="cp-default-btn">Send Message</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-8 col-sm-6 col-sm-12 col-12">
+                                                <div class='form-response'>
+                                                    <?php
+                                                        if (isset($success)) {
+                                                            echo $success;
+                                                        }
+                                                        if (isset($error)) {
+                                                            echo $error;
+                                                        }
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </form>
+                    <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <div class="sidebar-item-box">
+                            <ul class="sidebar-more-option">
+                                <li>
+                                    <a href="<?php echo base_url(); ?>/how-it-works"><img src="<?php echo base_url(); ?>/assets/images/more1.png" alt="more" class="img-fluid">Post a Free Ad</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>/favourite-ad-list"><img src="<?php echo base_url(); ?>/assets/images/more3.png" alt="more" class="img-fluid">Favorite Ad list</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
-    <!-- Subscribe Area End Here -->
+        </section>
+        <!-- Contact Area End Here -->
 
     <!-- Footer Area Start Here -->
     <footer>
@@ -155,7 +140,10 @@
                             <h3 class="title-medium-light title-bar-left size-lg">About us</h3>
                             <ul class="useful-link">
                                 <li>
-                                    <a href="<?php echo base_url(); ?>/about-us">About us</a>
+                                    <a href="about.html">About us</a>
+                                </li>
+                                <li>
+                                    <a href="#">Career</a>
                                 </li>
                                 <li>
                                     <a href="#">Terms &amp; Conditions</a>
@@ -177,7 +165,13 @@
                                     <a href="#">How to sell fast</a>
                                 </li>
                                 <li>
+                                    <a href="#">Buy Now on Classipost</a>
+                                </li>
+                                <li>
                                     <a href="#">Membership</a>
+                                </li>
+                                <li>
+                                    <a href="#">Banner Advertising</a>
                                 </li>
                                 <li>
                                     <a href="#">Promote your ad</a>
@@ -193,10 +187,13 @@
                                     <a href="#">Live Chat</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>/faq">FAQ</a>
+                                    <a href="faq.html">FAQ</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>/contact-us">Contact us</a>
+                                    <a href="#">Stay safe on classipost</a>
+                                </li>
+                                <li>
+                                    <a href="contact.html">Contact us</a>
                                 </li>
                             </ul>
                         </div>
@@ -234,8 +231,8 @@
                             <br>
                             <ul class="useful-link">
                                 <li><a>+94 77 101 8743</a></li>
-                                <li><a>sales@beluxa.co</a></li>
-                                <li><a>info@beluxa.co</a></li>
+                                <li><a>sales@beluxa.lk</a></li>
+                                <li><a>info@beluxa.lk</a></li>
                             </ul>
                         </div>
                     </div>
@@ -273,83 +270,10 @@
 <script src="<?php echo base_url(); ?>/assets/js/select2.min.js"></script>
 <script src="<?php echo base_url(); ?>/assets/js/jquery.meanmenu.min.js"></script>
 <script src="<?php echo base_url(); ?>/assets/js/jquery.scrollUp.min.js"></script>
+<!-- Validtor JS -->
+<script src="<?php echo base_url(); ?>/assets/js/validator.min.js"></script>
+<!-- Google Map js -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtmXSwv4YmAKtcZyyad9W7D4AC08z0Rb4"></script>
 <script src="<?php echo base_url(); ?>/assets/js/custom.js"></script>
-<script type="text/javascript">
-    $('#cp-search-form').on('submit', function(event){
-        $('[name=location]').prop('disabled', true)
-        $('[name=category]').prop('disabled', true)
-        $('[name=term]').prop('disabled', true)
-        if ($('[name=category]').val() == "") {
-            url = '<?php echo base_url(); ?>' + '/search/index' + $('[name=location]').val() + '?term=' + $('[name=term]').val();
-            $(this).attr('action', url);
-        } else {
-            url = '<?php echo base_url(); ?>' + '/search/index/' + $('[name=location]').val() + '/' + $('[name=category]').val() + '?term=' + $('[name=term]').val();
-            $(this).attr('action', url);
-        }
-    });
-
-    // Variable to hold request
-    var request;
-    
-    $('#subscribe').submit(function(event) {
-
-        event.preventDefault();
-
-        // Abort any pending request
-        if (request) {
-            request.abort();
-        }
-        // setup some local variables
-        var $form = $(this);
-
-        // Let's select and cache all the fields
-        var $inputs = $form.find("input, select, button, textarea");
-
-        // Serialize the data in the form
-        var serializedData = $form.serialize();
-
-        // Let's disable the inputs for the duration of the Ajax request.
-        // Note: we disable elements AFTER the form data has been serialized.
-        // Disabled form elements will not be serialized.
-        $inputs.prop("disabled", true);
-
-        // Fire off the request to /form.php
-        request = $.ajax({
-            url: "<?php echo base_url(); ?>/home/subscribe",
-            type: "post",
-            data: serializedData
-        });
-
-        // Callback handler that will be called on success
-        request.done(function (response, textStatus, jqXHR){
-            // Log a message to the console
-            document.getElementById("subscribe-box").innerHTML = "<h4 style='text-align:center;font-family:'Poppins',sans-serif;color:rgba(255,255,255,1.0);font-weight:600;'>"+response+"</h4>";
-        });
-
-        // Callback handler that will be called on failure
-        request.fail(function (jqXHR, textStatus, errorThrown){
-            // Log the error to the console
-            console.error(
-                "The following error occurred: "+
-                textStatus, errorThrown
-            );
-        });
-
-        // Callback handler that will be called regardless
-        // if the request failed or succeeded
-        request.always(function () {
-            // Reenable the inputs
-            $inputs.prop("disabled", false);
-        });
-    });
-
-    $('.popup-close').click(function(e) {
-        $('.popup-wrap').fadeOut(500);
-        $('.popup-box').removeClass('transform-in').addClass('transform-out');
-
-        e.preventDefault();
-    });
-    
-</script>
 </body>
 </html>

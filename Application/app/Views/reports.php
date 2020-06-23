@@ -15,38 +15,34 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="category/create" class="btn btn-orange" alt="Create Category">Add New</a>
-                        </div>
-                    </div>
-                    <br />
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3><i class="fas fa-list-alt"></i> All Categories</h3>
+                            <h3><i class="fas fa-list-alt"></i> All Reports</h3>
                             <br />
                             <?php
                                 if ($category) {
-                                    echo '<table class="table table-striped table-bordered" id="category">';
+                                    echo '<table class="table table-striped table-bordered" id="reports">';
                                         echo '<thead>';
                                             echo '<tr>';
                                                 echo '<th>ID</th>';
-                                                echo '<th>Icons</th>';
-                                                echo '<th>Name</th>';
-                                                echo '<th>Description</th>';
-                                                echo '<th>Edit</th>';
+                                                echo '<th>Advertisement</th>';
+                                                echo '<th>Reason</th>';
+                                                echo '<th>Reported Time</th>';
                                                 echo '<th>Delete</th>';
                                             echo '</tr>';
                                         echo '</thead>';
 
                                         echo '<tbody>';
-                                            foreach ($category as $cat) {
+                                            foreach ($reports as $report) {
                                                 echo '<tr>';
-                                                    echo '<td>'.$cat['id'].'</td>';
-                                                    echo '<td><img class="img-icon" src="'.base_url().'/assets/uploads/'.$cat['category_icon'].'" alt="Icon for '.$cat['category_name'].' category"/></td>';
-                                                    echo '<td>'.$cat['category_name'].'</td>';
-                                                    echo '<td>'.$cat['category_desc'].'</td>';
-                                                    echo '<td><a class="a-orange" href="'.base_url().'/category/edit/'.$cat['id'].'" alt="Edit Category - '.$cat['category_name'].'"><i class="far fa-edit"></i></a></td>';
-                                                    echo '<td><a class="a-orange" href="'.base_url().'/category/delete/'.$cat['id'].'" alt="Delete Category - '.$cat['category_name'].'"><i class="far fa-trash-alt"></i></a></td>';
+                                                    echo '<td>'.$report['id'].'</td>';
+                                                    foreach ($advertisements as $ad) {
+                                                        if ($ad['id'] == $report['ad_id']) {
+                                                            echo '<td>'.$ad['title'].'</td>';
+                                                            break;
+                                                        }
+                                                    }
+                                                    echo '<td>'.$report['reason'].'</td>';
+                                                    echo '<td>'.$report['posted_time'].'</td>';
+                                                    echo '<td><a class="a-orange" href="'.base_url().'/report/delete/'.$cat['id'].'" alt="Delete Category - '.$cat['category_name'].'"><i class="far fa-trash-alt"></i></a></td>';
                                                 echo '</tr>';
                                             }
                                         echo '</tbody>';
@@ -54,7 +50,7 @@
                                 } else {
                                     echo '<div class="col-md-12">';
                                         echo '<div class="alert alert-warning" role="alert">';
-                                            echo 'No Categories Found!';
+                                            echo 'No Reports Found!';
                                         echo '</div>';
                                     echo '</div>';
                                 }
@@ -72,7 +68,7 @@
     <footer class="bg-blue">
         <div class="row">
             <div class="col-md-4">
-                <img src="<?php echo base_url(); ?>/assets/images/logo final 3-3.png" alt="Ad Portal" style="width:156px;"/>
+                <img src="<?php echo base_url(); ?>/assets/images/logo final 3-3.png" alt="Beluxa Advertisement Portal" style="width:156px;"/>
                 <p style="font-weight: 400;"><br>125A, Main Street,<br>Colombo,<br>Sri Lanka</p>
                 <p style="font-weight: 400; font-size: 0.75em;">&copy; <?php echo date('Y'); ?>. Developed by <a href="http://zenolk.com" alt="Zeno Innovations (Pvt) Ltd">Zeno Innovations</a>.</p>
             </div>
@@ -109,7 +105,7 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready( function () {
-        $('#category').DataTable();
+        $('#reports').DataTable();
     } );
 </script>
 </body>

@@ -6,13 +6,14 @@
                 <div class="row no-gutters">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-8">
                         <div class="top-bar-left">
-                            <a href="post-ad.html" class="cp-default-btn d-lg-none">Post Your Ad</a>
+                            <a href="<?php echo base_url(); ?>/how-it-works" class="cp-default-btn d-lg-none">Post Your Ad</a>
                             <p class="d-none d-lg-block">
                                 <i class="fa fa-life-ring" aria-hidden="true"></i>Have any questions? +94 77 123 4567 or sales@beluxa.lk
                             </p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-4">
+                        <!--
                         <div class="top-bar-right">
                             <ul>
                                 <li class="hidden-mb">
@@ -21,7 +22,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -32,7 +33,17 @@
                     <div class="col-lg-2 col-md-2 col-sm-3">
                         <div class="logo-area">
                             <a href="<?php echo base_url(); ?>" class="img-fluid">
-                                <img src="img/logo.png" alt="logo">
+                                <?php 
+                                    $site_title = "";
+                                    foreach ($settings as $set) {
+                                        if ($set['option_name'] == 'site_title') {
+                                            $site_title = $set['option_value'];
+                                        }
+                                        if ($set['option_name'] == 'site_logo') {
+                                            echo '<img src="'.base_url().'/assets/images/'.$set['option_value'].'" alt="'.$site_title.'">';
+                                        }
+                                    }
+                                ?>
                             </a>
                         </div>
                     </div>
@@ -40,16 +51,16 @@
                         <div class="cp-main-menu">
                             <nav>
                                 <ul>
-                                    <li><a href="<?php base_url(); ?>/">Home</a></li>
-                                    <li><a href="<?php base_url(); ?>/about">Who We Are</a></li>
-                                    <li><a href="<?php base_url(); ?>">How It Works?</a></li>
-                                    <li><a href="<?php base_url(); ?>/contact">Contact</a></li>
+                                    <li><a href="<?php echo base_url(); ?>">Home</a></li>
+                                    <li><a href="<?php echo base_url(); ?>/about-us">Who We Are</a></li>
+                                    <li><a href="<?php echo base_url(); ?>/how-it-works">How It Works?</a></li>
+                                    <li><a href="<?php echo base_url(); ?>/contact-us">Contact</a></li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-3 text-right">
-                        <a href="#" class="cp-default-btn">Post Your Ad</a>
+                        <a href="<?php echo base_url(); ?>/how-it-works" class="cp-default-btn">Post Your Ad</a>
                     </div>
                 </div>
             </div>
@@ -63,10 +74,10 @@
                     <div class="mobile-menu">
                         <nav id="dropdown">
                             <ul>
-                                <li><a href="<?php base_url(); ?>/">Home</a></li>
-                                <li><a href="about.html">Who We Are</a></li>
-                                <li><a href="how-it-works.html">How It Works?</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="<?php echo base_url(); ?>">Home</a></li>
+                                <li><a href="<?php echo base_url(); ?>/about-us">Who We Are</a></li>
+                                <li><a href="<?php echo base_url(); ?>/how-it-works">How It Works?</a></li>
+                                <li><a href="<?php echo base_url(); ?>/contact-us">Contact</a></li>
                             </ul>
                         </nav>
                     </div>

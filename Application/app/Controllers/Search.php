@@ -82,7 +82,7 @@ class Search extends BaseController
         // If first parameter is null then all ads
         if ($param1 == null) {
             // Retrieve all the advertisements and display all ads
-            $data['advertisement'] = $modelAdvertisement->like('title',$term)->orderBy('id','DESC')->findAll();
+            $data['advertisement'] = $modelAdvertisement->where('status',1)->like('title',$term)->orderBy('id','DESC')->findAll();
             if ($this->request->getVar('term') == null) {
                 $data['term']=null;
             } else {
@@ -102,7 +102,7 @@ class Search extends BaseController
             $country = $modelLocation->where('country',$param1)->first();
             if ($country != null) {
                 // Parameter 1 is a country. So again return all ads while also checking using search term.
-                $data['advertisement'] = $modelAdvertisement->like('title',$term)->orderBy('id','DESC')->findAll();
+                $data['advertisement'] = $modelAdvertisement->where('status',1)->like('title',$term)->orderBy('id','DESC')->findAll();
                 if ($this->request->getVar('term') == null) {
                     $data['term']=null;
                 } else {
@@ -125,7 +125,7 @@ class Search extends BaseController
                     $data['city'] = $locations;
 
                     // Retrieve Advertsements based on Search Term and Location
-                    $advertisements = $modelAdvertisement->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                    $advertisements = $modelAdvertisement->where('status',1)->like('title',$term)->orderBy('post_date','DESC')->findAll();
                     $filteredAds=array();
 
                     foreach ($locations as $loc) {
@@ -139,7 +139,7 @@ class Search extends BaseController
                     $data['adresults'] = $filteredAds;
                 } else {
                     // Retrieve advertisements based on Search Term Only.
-                    $data['adresults'] = $modelAdvertisement->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                    $data['adresults'] = $modelAdvertisement->where('status',1)->like('title',$term)->orderBy('post_date','DESC')->findAll();
                 }
 
                 if ($this->request->getVar('term') == null) {
@@ -165,9 +165,9 @@ class Search extends BaseController
                 if ($category != null) {
                     $data['selectedCategory'] = $category;
                     $data['subcategory'] = $modelSubcategory->where('category_id',$category['id'])->orderBy('sub_category_name','ASC')->findAll();
-                    $data['adresults'] = $modelAdvertisement->where('cat_id',$category['id'])->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                    $data['adresults'] = $modelAdvertisement->where(['status' => 1, 'cat_id' => $category['id']])->like('title',$term)->orderBy('post_date','DESC')->findAll();
                 } else {
-                    $data['adresults'] = $modelAdvertisement->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                    $data['adresults'] = $modelAdvertisement->where('status', 1)->like('title',$term)->orderBy('post_date','DESC')->findAll();
                 }
 
                 if ($this->request->getVar('term') == null) {
@@ -196,7 +196,7 @@ class Search extends BaseController
                         // Parameter 2 is a city
                         $data['selectedCity'] = $param2;
                         // Get Advertisements based on input city
-                        $data['adresults'] = $modelAdvertisement->where('location',$city['id'])->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                        $data['adresults'] = $modelAdvertisement->where(['status' => 1,'location' => $city['id']])->like('title',$term)->orderBy('post_date','DESC')->findAll();
                     } else {
                         // If City is Null check if Category
                         $category = $modelCategory->where('category_slug',$param2)->first();
@@ -204,7 +204,7 @@ class Search extends BaseController
                             // Parameter 2 is a category and Parameter 1 is a District
                             $data['selectedCategory'] = $category;
                             // Get Advertisements based on input category and district
-                            $advertisements = $modelAdvertisement->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                            $advertisements = $modelAdvertisement->where('status',1)->like('title',$term)->orderBy('post_date','DESC')->findAll();
                             $filteredAds=array();
 
                             foreach ($locations as $loc) {
@@ -221,11 +221,11 @@ class Search extends BaseController
                             $data['adresults'] = $filteredAds;
                         } else {
                             // Parameter 2 is not a category. Invalid value. Return all ads.
-                            $data['adresults'] = $modelAdvertisement->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                            $data['adresults'] = $modelAdvertisement->where('status',1)->like('title',$term)->orderBy('post_date','DESC')->findAll();
                         }
                     }
                 } else {
-                    $data['adresults'] = $modelAdvertisement->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                    $data['adresults'] = $modelAdvertisement->where('status',1)->like('title',$term)->orderBy('post_date','DESC')->findAll();
                 }
                 
                 if ($this->request->getVar('term') == null) {
@@ -257,17 +257,17 @@ class Search extends BaseController
                         // Parameter 1 is a Country - Sri Lanka.
                         // Parameter 2 is a Category
                         // Parameter 3 is a subcategory. Therefore, retrieve all advertisements.
-                        $data['adresults'] = $modelAdvertisement->where('subcat_id',$subcategory['id'])->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                        $data['adresults'] = $modelAdvertisement->where(['status' => 1, 'subcat_id' => $subcategory['id']])->like('title',$term)->orderBy('post_date','DESC')->findAll();
                         $data['selectedSubcategory'] = $subcategory;
                         $data['subcategory'] = $modelSubcategory->where('category_id',$category['id'])->orderBy('sub_category_name','ASC')->findAll();
                     } else {
                         // Invalid Parameter 3, therefore return advertisements based on the category - Last known valid parameter
-                        $data['adresults'] = $modelAdvertisement->where('cat_id',$category['id'])->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                        $data['adresults'] = $modelAdvertisement->where(['status' => 1, 'cat_id' => $category['id']])->like('title',$term)->orderBy('post_date','DESC')->findAll();
                         $data['subcategory'] = $modelSubcategory->where('category_id',$category['id'])->orderBy('sub_category_name','ASC')->findAll();
                    }
                 } else {
                     // Invalid Parameter therefore do not have to check Parameter 3. Return all ads based on last known valid parameter - Country. All are of same country so return all advertisements.
-                    $data['adresults'] = $modelAdvertisement->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                    $data['adresults'] = $modelAdvertisement->where('status',1)->like('title',$term)->orderBy('post_date','DESC')->findAll();
                 }
 
                 if ($this->request->getVar('term') == null) {
@@ -300,14 +300,14 @@ class Search extends BaseController
                             // Parameter 2 is a city
                             // Parameter 3 is a category
                             // Retrieve all ads based on the category and city
-                            $data['adresults'] = $modelAdvertisement->where(['cat_id' => $category['id'], 'location' => $city['id']])->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                            $data['adresults'] = $modelAdvertisement->where(['status' => 1, 'cat_id' => $category['id'], 'location' => $city['id']])->like('title',$term)->orderBy('post_date','DESC')->findAll();
                             $data['selectedCategory']=$category;
                             $data['subcategory'] = $modelSubcategory->where('category_id', $category['id'])->orderBy('sub_category_name','ASC')->findAll();
                         } else {
                             // Parameter 1 is a district
                             // Parameter 2 is a city
                             // Parameter 3 is not a category - Return ads based on city
-                            $data['adresults'] = $modelAdvertisement->where('location',$city['id'])->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                            $data['adresults'] = $modelAdvertisement->where(['status' => 1, 'location' => $city['id']])->like('title',$term)->orderBy('post_date','DESC')->findAll();
                         }
                     } else {
                         // Parameter 2 is a category
@@ -321,8 +321,9 @@ class Search extends BaseController
                                 // Parameter 1 is a District
                                 // Parameter 2 is a category
                                 // Parameter 3 is a valid Subcategory
-                                $advertisements = $modelAdvertisement->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                                $advertisements = $modelAdvertisement->where('status',1)->like('title',$term)->orderBy('post_date','DESC')->findAll();
                                 $data['selectedSubcategory']=$subcategory;
+                                $data['city'] = $modelLocation->where('district',$param1)->orderBy('city','ASC')->findAll();
                                 $filteredAds=array();
 
                                 foreach($locations as $loc) {
@@ -337,7 +338,7 @@ class Search extends BaseController
                                 // Parameter 1 is a District
                                 // Parameter 2 is a category
                                 // Parameter 3 is a invalid subategory 
-                                $advertisements = $modelAdvertisement->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                                $advertisements = $modelAdvertisement->where('status',1)->like('title',$term)->orderBy('post_date','DESC')->findAll();
                                 $filteredAds=array();
 
                                 foreach ($locations as $loc) {
@@ -352,7 +353,7 @@ class Search extends BaseController
                         } else {
                             // Parameter 1 is a District
                             // Parameter 2 is not a city or a category - Return ads based on district
-                            $advertisements = $modelAdvertisement->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                            $advertisements = $modelAdvertisement->where('status',1)->like('title',$term)->orderBy('post_date','DESC')->findAll();
                             $filteredAds=array();
 
                             foreach ($locations as $loc) {
@@ -368,7 +369,7 @@ class Search extends BaseController
                     }
                 } else {
                     // Invalid District therefore do not have to check Parameter 3. Return all ads.
-                    $data['adresults'] = $modelAdvertisement->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                    $data['adresults'] = $modelAdvertisement->where('status',1)->like('title',$term)->orderBy('post_date','DESC')->findAll();
                 }
                 
                 if ($this->request->getVar('term') == null) {
@@ -404,7 +405,7 @@ class Search extends BaseController
                             $data['selectedCity'] = $param2;
                             $data['selectedCategory'] = $category;
                             $data['selectedSubcategory'] = $subcategory;
-                            $data['adresults'] = $modelAdvertisement->where(['location' => $param2, 'subcat_id' => $subcategory['id']])->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                            $data['adresults'] = $modelAdvertisement->where(['status' => 1, 'location' => $city['id'], 'subcat_id' => $subcategory['id']])->like('title',$term)->orderBy('post_date','DESC')->findAll();
                         } else {
                             // Parameter 1 is a District
                             // Parameter 2 is a City
@@ -415,7 +416,7 @@ class Search extends BaseController
                             $data['selectedCity'] = $param2;
                             $data['selectedCategory'] = $category;
                             $data['subcategory'] = $modelSubcategory->where('category_id', $category['id'])->orderBy('sub_category_name','ASC')->findAll();
-                            $data['adresults'] = $modelAdvertisement->where(['location' => $param2, 'cat_id' => $category['id']])->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                            $data['adresults'] = $modelAdvertisement->where(['status' => 1, 'location' => $city['id'], 'cat_id' => $category['id']])->like('title',$term)->orderBy('post_date','DESC')->findAll();
                         }
                     } else {
                         // Parameter 1 is  District
@@ -425,13 +426,13 @@ class Search extends BaseController
                         $data['selectedDistrict'] = $param1;
                         $data['selectedCity'] = $param2;
                         $data['category'] = $modelCategory->orderBy('category_name','ASC')->findAll();
-                        $data['adresults'] = $modelAdvertisement->where('location', $param2)->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                        $data['adresults'] = $modelAdvertisement->where(['status' => 1, 'location' => $city['id']])->like('title',$term)->orderBy('post_date','DESC')->findAll();
                     }
                 } else {
                     // Parameter 1 is a District
                     // Invalid Parameter 2
                     // Parameter 2 is not a city - Return ads based on district
-                    $advertisements = $modelAdvertisement->like('title',$term)->orderBy('post_date','DESC')->findAll();
+                    $advertisements = $modelAdvertisement->where('status',1)->like('title',$term)->orderBy('post_date','DESC')->findAll();
                     $filteredAds=array();
 
                     foreach ($locations as $loc) {
@@ -450,7 +451,7 @@ class Search extends BaseController
             } else {    
                 // Invalid Parameter 1
                 // Return All Advertisements
-                $data['adresults'] = $modelAdvertisement->like('title',$term)->orderBy('post_date','DESC')->findAll();                
+                $data['adresults'] = $modelAdvertisement->where('status',1)->like('title',$term)->orderBy('post_date','DESC')->findAll();                
             }
 
             if ($this->request->getVar('term') == null) {

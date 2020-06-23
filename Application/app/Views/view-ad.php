@@ -79,9 +79,9 @@
                                 <div class="tab-content">
                                     <span class="price" style="background-image: url(<?php echo base_url(); ?>/assets/images/product-price-back.png)!important;">
                                     <?php
-                                        echo '<small>රු </small>'.number_format($advertisement['price'],2);
+                                        echo '<small>LKR </small>'.number_format($advertisement['price'],2);
                                         if ($advertisement['negotiate'] == 1) {
-                                            echo '<small>Negotiable</small>';
+                                            echo '<br><small style="font-size:11px;font-weight:600;">Negotiable</small>';
                                         }
                                     ?>
                                     </span>
@@ -115,17 +115,23 @@
                                     <ul class="specification-layout2 mb-40">
                                         <li>
                                             <?php
-                                                echo '<a href="'.base_url().'/search/index/sri-lanka/'.$category['category_slug'].'">'.$category['category_name'].'</a>';
+                                                echo '<a href="'.base_url().'/search/index/sri-lanka/'.$category['category_slug'].'" alt="'.$category['category_name'].' - Category">'.$category['category_name'].'</a>';
                                             ?>
                                         </li>
                                         <li>
                                             <?php
-                                                echo '<a href="'.base_url().'/search/index/sri-lanka/'.$category['category_slug'].'/'.$subcategory['sub_category_slug'].'">'.$subcategory['sub_category_name'].'</a>';
+                                                echo '<a href="'.base_url().'/search/index/sri-lanka/'.$category['category_slug'].'/'.$subcategory['sub_category_slug'].'" alt="'.$subcategory['sub_category_name'].' - Subcategory">'.$subcategory['sub_category_name'].'</a>';
                                             ?>
                                         </li>
                                         <li>
                                             <?php
-                                                echo 'රු '.number_format($advertisement['price'],2);
+                                                echo '<a href="'.base_url().'/search/index/'.$location['district'].'" alt="'.$location['district'].' - District">'.$location['district'].'</a>, ';
+                                                echo '<a href="'.base_url().'/search/index/'.$location['district'].'/'.$location['city'].'" alt="'.$location['city'].' - City">'.$location['city'].'</a>';
+                                            ?>
+                                        </li>
+                                        <li>
+                                            <?php
+                                                echo 'LKR '.number_format($advertisement['price'],2);
                                             ?>
                                         </li>
                                         <?php
@@ -135,6 +141,14 @@
                                                 echo '<li>Not Negotiable</li>';
                                             }
                                         ?>
+                                        <li>
+                                            <ul class="sidebar-social">
+                                                <li>Share:</li>
+                                                <li><a href="http://www.facebook.com/sharer.php?u=<?php echo base_url().'/ad/'.$advertisement['slug']; ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                                <li><a href="http://twitter.com/share?url=<?php echo base_url().'/ad/'.$advertisement['slug']; ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                                <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=<?php echo base_url().'/ad/'.$advertisement['slug']; ?>"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -142,8 +156,7 @@
                                 <li>
                                     <a href="#" onclick="savead(<?php echo $advertisement['id']; ?>, '<?php echo $advertisement['title']; ?>');"><i class="fa fa-heart" aria-hidden="true" id="saveadicon"></i><span id="saveadbtn">Save Ad</span></a>
                                 </li>
-                                <li><a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i>Share ad</a></li>
-                                <li><a href="#"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Report abuse</a></li>
+                                <li><a href="<?php echo base_url().'/Home/report/'.$advertisement['id'] ?>"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Report abuse</a></li>
                             </ul>
                         </div>
                     </div>
@@ -222,193 +235,90 @@
             </div>
             <div class="gradient-wrapper">
                 <div class="gradient-title">
-                    <h2>More Ads From This Category </h2>
+                    <h2>Latest Ads In This Category </h2>
                 </div>
                 <div class="gradient-padding">
-                    <div class="cp-carousel nav-control-middle category-grid-layout1" data-loop="true" data-items="5" data-margin="30" data-autoplay="true" data-autoplay-timeout="5000" data-smart-speed="2000" data-dots="false" data-nav="true" data-nav-speed="false" data-r-x-small="1" data-r-x-small-nav="true" data-r-x-small-dots="false" data-r-x-medium="2" data-r-x-medium-nav="true" data-r-x-medium-dots="false" data-r-small="3" data-r-small-nav="true" data-r-small-dots="false" data-r-medium="4" data-r-medium-nav="true" data-r-medium-dots="false" data-r-Large="5" data-r-Large-nav="true" data-r-Large-dots="false">
-                        <div class="product-box item-mb zoom-gallery">
-                            <!-- <?php
-                                // if ($advertisements) {
-                                //     foreach ($advertisements as $ad) {
-                                //         echo '<div class="item-mask-wrapper">';
-                                //             echo '<div class="item-mask secondary-bg-box">';
-                                //                 foreach ($medias as $md) {
-                                //                     echo '<img src="'.base_url().'/assets/uploads/'.$md['path'].'" alt="'.$md['alt'].'" class="img-fluid">';
-                                //                 }
-                                //                 echo '<div class="title-ctg">'.$ad['title'];'</div>';
-                                //                 echo '<ul class="info-link">';
-                                //                     foreach ($medias as $md) {
-                                //                         if ($md['ad_id'] == $ad['id']) {
-                                //                             echo '<li><a href="'.base_url().'assets/uploads/'.$md['path'].'" class="elv-zoom" data-fancybox-group="gallery" title=""><i class="fa fa-arrows-alt" aria-hidden="true"></i></a></li>';
-                                //                         }
-                                //                     }
-                                //                     echo '<li><a href="'.base_url().'/ad/'.$ad['slug'].'"><i class="fa fa-link" aria-hidden="true"></i></a></li>';
-                                //                 echo '</ul>';
-                                //             echo'</div>';
-                                //         echo '</div>';
-                                //     }
-                                // } else {
-                                //     echo 'No Advertisements';
-                                // }
-                            ?> -->
-                            <div class="item-mask-wrapper">
-                                <div class="item-mask secondary-bg-box">
-                                    <img src="img/product/product1.png" alt="categories" class="img-fluid">
-                                    <div class="trending-sign active" data-tips="Featured"> 
-                                        <i class="fa fa-bolt" aria-hidden="true"></i> 
-                                    </div>
-                                    <div class="title-ctg">Clothing</div>
-                                    <ul class="info-link">
-                                        <li><a href="img/product/product1.png" class="elv-zoom" data-fancybox-group="gallery" title="Title Here"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a></li>
-                                        <li><a href="single-product-layout1.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                    <div class="symbol-featured"><img src="img/banner/symbol-featured.png" alt="symbol" class="img-fluid"> </div>
-                                </div>
-                            </div>
-                            <div class="item-content">
-                                <div class="title-ctg">Clothing</div>
-                                <h3 class="short-title"><a href="single-product1.html">Cotton T-Shirt</a></h3>
-                                <h3 class="long-title"><a href="single-product1.html">Men's Basic Cotton T-Shirt</a></h3>
-                                <ul class="upload-info">
-                                    <li class="date"><i class="fa fa-clock-o" aria-hidden="true"></i>07 Mar, 2017</li>
-                                    <li class="place"><i class="fa fa-map-marker" aria-hidden="true"></i>Sydney, Australia</li>
-                                    <li class="tag-ctg"><i class="fa fa-tag" aria-hidden="true"></i>Clothing</li>
-                                </ul>
-                                <p>Eimply dummy text of the printing and typesetting industrym has been the industry's standard dummy.</p>
-                                <div class="price">$15</div>
-                                <a href="single-product-layout1.html" class="product-details-btn">Details</a>
-                            </div>
-                        </div>
-                        <div class="product-box item-mb zoom-gallery">
-                            <div class="item-mask-wrapper">
-                                <div class="item-mask secondary-bg-box"><img src="img/product/product2.png" alt="categories" class="img-fluid">
-                                    <div class="trending-sign active" data-tips="Featured"> <i class="fa fa-bolt" aria-hidden="true"></i> </div>
-                                    <div class="title-ctg">Electronics</div>
-                                    <ul class="info-link">
-                                        <li><a href="img/product/product2.png" class="elv-zoom" data-fancybox-group="gallery" title="Title Here"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a></li>
-                                        <li><a href="single-product-layout1.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                    <div class="symbol-featured"><img src="img/banner/symbol-featured.png" alt="symbol" class="img-fluid"> </div>
-                                </div>
-                            </div>
-                            <div class="item-content">
-                                <div class="title-ctg">Clothing</div>
-                                <h3 class="short-title"><a href="single-product2.html">Patriot Phone</a></h3>
-                                <h3 class="long-title"><a href="single-product2.html">HTC Desire Patriot Mobile Smart Phone</a></h3>
-                                <ul class="upload-info">
-                                    <li class="date"><i class="fa fa-clock-o" aria-hidden="true"></i>07 Mar, 2017</li>
-                                    <li class="place"><i class="fa fa-map-marker" aria-hidden="true"></i>Sydney, Australia</li>
-                                    <li class="tag-ctg"><i class="fa fa-tag" aria-hidden="true"></i>Clothing</li>
-                                </ul>
-                                <p>Eimply dummy text of the printing and typesetting industrym has been the industry's standard dummy.</p>
-                                <div class="price">$250</div>
-                                <a href="single-product-layout1.html" class="product-details-btn">Details</a>
-                            </div>
-                        </div>
-                        <div class="product-box item-mb zoom-gallery">
-                            <div class="item-mask-wrapper">
-                                <div class="item-mask secondary-bg-box"><img src="img/product/product3.png" alt="categories" class="img-fluid">
-                                    <div class="trending-sign active" data-tips="Featured"> <i class="fa fa-bolt" aria-hidden="true"></i> </div>
-                                    <div class="title-ctg">Electronics</div>
-                                    <ul class="info-link">
-                                        <li><a href="img/product/product3.png" class="elv-zoom" data-fancybox-group="gallery" title="Title Here"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a></li>
-                                        <li><a href="single-product-layout1.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                    <div class="symbol-featured"><img src="img/banner/symbol-featured.png" alt="symbol" class="img-fluid"> </div>
-                                </div>
-                            </div>
-                            <div class="item-content">
-                                <div class="title-ctg">Clothing</div>
-                                <h3 class="short-title"><a href="single-product3.html">Smart LED TV</a></h3>
-                                <h3 class="long-title"><a href="single-product3.html">TCL 55-Inch 4K Ultra HD Roku Smart LED TV</a></h3>
-                                <ul class="upload-info">
-                                    <li class="date"><i class="fa fa-clock-o" aria-hidden="true"></i>07 Mar, 2017</li>
-                                    <li class="place"><i class="fa fa-map-marker" aria-hidden="true"></i>Sydney, Australia</li>
-                                    <li class="tag-ctg"><i class="fa fa-tag" aria-hidden="true"></i>Clothing</li>
-                                </ul>
-                                <p>Eimply dummy text of the printing and typesetting industrym has been the industry's standard dummy.</p>
-                                <div class="price">$800</div>
-                                <a href="single-product-layout1.html" class="product-details-btn">Details</a>
-                            </div>
-                        </div>
-                        <div class="product-box item-mb zoom-gallery">
-                            <div class="item-mask-wrapper">
-                                <div class="item-mask secondary-bg-box"><img src="img/product/product4.png" alt="categories" class="img-fluid">
-                                    <div class="trending-sign" data-tips="Featured"> <i class="fa fa-bolt" aria-hidden="true"></i> </div>
-                                    <div class="title-ctg">Clothing</div>
-                                    <ul class="info-link">
-                                        <li><a href="img/product/product4.png" class="elv-zoom" data-fancybox-group="gallery" title="Title Here"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a></li>
-                                        <li><a href="single-product-layout1.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                    <div class="symbol-featured"><img src="img/banner/symbol-featured.png" alt="symbol" class="img-fluid"> </div>
-                                </div>
-                            </div>
-                            <div class="item-content">
-                                <div class="title-ctg">Clothing</div>
-                                <h3 class="short-title"><a href="single-product1.html">Headphones</a></h3>
-                                <h3 class="long-title"><a href="single-product1.html">Basics Lightweight On-Ear Headphones</a></h3>
-                                <ul class="upload-info">
-                                    <li class="date"><i class="fa fa-clock-o" aria-hidden="true"></i>07 Mar, 2017</li>
-                                    <li class="place"><i class="fa fa-map-marker" aria-hidden="true"></i>Sydney, Australia</li>
-                                    <li class="tag-ctg"><i class="fa fa-tag" aria-hidden="true"></i>Clothing</li>
-                                </ul>
-                                <p>Eimply dummy text of the printing and typesetting industrym has been the industry's standard dummy.</p>
-                                <div class="price">$15</div>
-                                <a href="single-product-layout1.html" class="product-details-btn">Details</a>
-                            </div>
-                        </div>
-                        <div class="product-box item-mb zoom-gallery">
-                            <div class="item-mask-wrapper">
-                                <div class="item-mask secondary-bg-box"><img src="img/product/product5.png" alt="categories" class="img-fluid">
-                                    <div class="trending-sign" data-tips="Featured"> <i class="fa fa-bolt" aria-hidden="true"></i> </div>
-                                    <div class="title-ctg">Clothing</div>
-                                    <ul class="info-link">
-                                        <li><a href="img/product/product5.png" class="elv-zoom" data-fancybox-group="gallery" title="Title Here"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a></li>
-                                        <li><a href="single-product-layout1.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                    <div class="symbol-featured"><img src="img/banner/symbol-featured.png" alt="symbol" class="img-fluid"> </div>
-                                </div>
-                            </div>
-                            <div class="item-content">
-                                <div class="title-ctg">Clothing</div>
-                                <h3 class="short-title"><a href="single-product2.html">Handbags</a></h3>
-                                <h3 class="long-title"><a href="single-product2.html">MMK collection Women Fashion Matching Satchel handbags</a></h3>
-                                <ul class="upload-info">
-                                    <li class="date"><i class="fa fa-clock-o" aria-hidden="true"></i>07 Mar, 2017</li>
-                                    <li class="place"><i class="fa fa-map-marker" aria-hidden="true"></i>Sydney, Australia</li>
-                                    <li class="tag-ctg"><i class="fa fa-tag" aria-hidden="true"></i>Clothing</li>
-                                </ul>
-                                <p>Eimply dummy text of the printing and typesetting industrym has been the industry's standard dummy.</p>
-                                <div class="price">$15</div>
-                                <a href="single-product-layout1.html" class="product-details-btn">Details</a>
-                            </div>
-                        </div>
-                        <div class="product-box item-mb zoom-gallery">
-                            <div class="item-mask-wrapper">
-                                <div class="item-mask secondary-bg-box"><img src="img/product/product6.png" alt="categories" class="img-fluid">
-                                    <div class="trending-sign" data-tips="Featured"> <i class="fa fa-bolt" aria-hidden="true"></i> </div>
-                                    <div class="title-ctg">Clothing</div>
-                                    <ul class="info-link">
-                                        <li><a href="img/product/product6.png" class="elv-zoom" data-fancybox-group="gallery" title="Title Here"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a></li>
-                                        <li><a href="single-product-layout1.html"><i class="fa fa-link" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                    <div class="symbol-featured"><img src="img/banner/symbol-featured.png" alt="symbol" class="img-fluid"> </div>
-                                </div>
-                            </div>
-                            <div class="item-content">
-                                <div class="title-ctg">Clothing</div>
-                                <h3 class="short-title"><a href="single-product3.html">Classic Watch</a></h3>
-                                <h3 class="long-title"><a href="single-product3.html">Men's Classic Sport Watch with Black Band</a></h3>
-                                <ul class="upload-info">
-                                    <li class="date"><i class="fa fa-clock-o" aria-hidden="true"></i>07 Mar, 2017</li>
-                                    <li class="place"><i class="fa fa-map-marker" aria-hidden="true"></i>Sydney, Australia</li>
-                                    <li class="tag-ctg"><i class="fa fa-tag" aria-hidden="true"></i>Clothing</li>
-                                </ul>
-                                <p>Eimply dummy text of the printing and typesetting industrym has been the industry's standard dummy.</p>
-                                <div class="price">$15</div>
-                                <a href="single-product-layout1.html" class="product-details-btn">Details</a>
-                            </div>
-                        </div>
+                    <?php
+                        if (count($advertisements) == 1) {
+                            echo '<div class="cp-carousel nav-control-middle category-grid-layout1" data-loop="true" data-items="1" data-margin="30" data-autoplay="true" data-autoplay-timeout="5000" data-smart-speed="2000" data-dots="true" data-nav="true" data-nav-speed="false" data-r-x-small="1" data-r-x-small-nav="true" data-r-x-small-dots="false" data-r-x-medium="1" data-r-x-medium-nav="true" data-r-x-medium-dots="false" data-r-small="1" data-r-small-nav="true" data-r-small-dots="false" data-r-medium="1" data-r-medium-nav="true" data-r-medium-dots="false" data-r-Large="1" data-r-Large-nav="true" data-r-Large-dots="false">';
+                        } elseif (count($advertisements) == 2) {
+                            echo '<div class="cp-carousel nav-control-middle category-grid-layout1" data-loop="true" data-items="2" data-margin="30" data-autoplay="true" data-autoplay-timeout="5000" data-smart-speed="2000" data-dots="true" data-nav="true" data-nav-speed="false" data-r-x-small="1" data-r-x-small-nav="true" data-r-x-small-dots="false" data-r-x-medium="1" data-r-x-medium-nav="true" data-r-x-medium-dots="false" data-r-small="1" data-r-small-nav="true" data-r-small-dots="false" data-r-medium="1" data-r-medium-nav="true" data-r-medium-dots="false" data-r-Large="1" data-r-Large-nav="true" data-r-Large-dots="false">';
+                        } elseif (count($advertisements) == 3) {
+                            echo '<div class="cp-carousel nav-control-middle category-grid-layout1" data-loop="true" data-items="3" data-margin="30" data-autoplay="true" data-autoplay-timeout="5000" data-smart-speed="2000" data-dots="true" data-nav="true" data-nav-speed="false" data-r-x-small="1" data-r-x-small-nav="true" data-r-x-small-dots="false" data-r-x-medium="1" data-r-x-medium-nav="true" data-r-x-medium-dots="false" data-r-small="1" data-r-small-nav="true" data-r-small-dots="false" data-r-medium="1" data-r-medium-nav="true" data-r-medium-dots="false" data-r-Large="1" data-r-Large-nav="true" data-r-Large-dots="false">';
+                        } elseif (count($advertisements) == 4) {
+                            echo '<div class="cp-carousel nav-control-middle category-grid-layout1" data-loop="true" data-items="4" data-margin="30" data-autoplay="true" data-autoplay-timeout="5000" data-smart-speed="2000" data-dots="true" data-nav="true" data-nav-speed="false" data-r-x-small="1" data-r-x-small-nav="true" data-r-x-small-dots="false" data-r-x-medium="1" data-r-x-medium-nav="true" data-r-x-medium-dots="false" data-r-small="1" data-r-small-nav="true" data-r-small-dots="false" data-r-medium="1" data-r-medium-nav="true" data-r-medium-dots="false" data-r-Large="1" data-r-Large-nav="true" data-r-Large-dots="false">';
+                        } else {
+                            echo '<div class="cp-carousel nav-control-middle category-grid-layout1" data-loop="true" data-items="5" data-margin="30" data-autoplay="true" data-autoplay-timeout="5000" data-smart-speed="2000" data-dots="true" data-nav="true" data-nav-speed="false" data-r-x-small="1" data-r-x-small-nav="true" data-r-x-small-dots="false" data-r-x-medium="1" data-r-x-medium-nav="true" data-r-x-medium-dots="false" data-r-small="1" data-r-small-nav="true" data-r-small-dots="false" data-r-medium="1" data-r-medium-nav="true" data-r-medium-dots="false" data-r-Large="1" data-r-Large-nav="true" data-r-Large-dots="false">';
+                        }
+                    ?>
+                    <div class="cp-carousel nav-control-middle category-grid-layout1" data-loop="true" data-items="1" data-margin="30" data-autoplay="true" data-autoplay-timeout="5000" data-smart-speed="2000" data-dots="false" data-nav="true" data-nav-speed="false" data-r-x-small="1" data-r-x-small-nav="true" data-r-x-small-dots="false" data-r-x-medium="2" data-r-x-medium-nav="true" data-r-x-medium-dots="false" data-r-small="3" data-r-small-nav="true" data-r-small-dots="false" data-r-medium="4" data-r-medium-nav="true" data-r-medium-dots="false" data-r-Large="5" data-r-Large-nav="true" data-r-Large-dots="false">
+                        <?php 
+                            if ($advertisements) {
+                                foreach ($advertisements as $ad) {
+                                    echo '<div class="product-box item-mb zoom-gallery">';
+                                        echo '<div class="item-mask-wrapper">';
+                                            echo '<div class="item-mask secondary-bg-box">';
+                                            foreach ($medias as $md) {
+                                                if ($md['ad_id'] == $ad['id']) {
+                                                    echo '<img src="'.base_url().'/assets/uploads/'.$md['path'].'" alt="'.$md['alt'].'" class="img-fluid" style="height:96px;"/>';
+                                                    break;
+                                                }
+                                            }
+                                            foreach ($categories as $cat) {
+                                                if ($cat['id'] == $ad['cat_id']) {
+                                                    echo '<div class="title-ctg">'.$cat['category_name'].'</div>';
+                                                    break;
+                                                }
+                                            }
+                                            echo '<ul class="info-link">';
+                                            foreach ($medias as $md) {
+                                                if ($md['ad_id'] == $ad['id']) {
+                                                    echo '<li><a href="'.base_url().'/assets/uploads/'.$md['path'].'" class="elv-zoom" data-fancybox-group="gallery" title="'.$md['title'].'"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a></li>';
+                                                    echo '<li><a href="'.base_url().'/ad/'.$ad['slug'].'" alt="'.$ad['title'].'"><i class="fa fa-link"></i></a></li>';
+                                                    break;
+                                                }
+                                            }
+                                            echo '</ul>';
+                                            // Featured Symbol
+                                            // echo '<div class="symbol-featured"><img src="'.base_url().'/assets/images/symbol-featured.png" alt="symbol" class="img-fluid"></div>';
+                                            echo '</div>';
+                                        echo '</div>';
+
+                                        echo '<div class="item-content">';
+                                            foreach ($categories as $cat) {
+                                                if ($cat['id'] == $ad['cat_id']) {
+                                                    echo '<div class="title-ctg">'.$cat['category_name'].'</div>';
+                                                    break;
+                                                }
+                                            }
+                                            echo '<h3 class="short-title"><a href="'.base_url().'/ad/'.$ad['slug'].'">'.$ad['title'].'</a></h3>';
+                                            echo '<h3 class="long-title"><a href="'.base_url().'/ad/'.$ad['slug'].'">'.$ad['title'].'</a></h3>';
+                                            echo '<ul class="upload-info">';
+                                                echo '<li class="date"><i class="fa fa-clock-o" aria-hidden="true"></i>'.date_format(new DateTime($ad['post_date']),"d M, Y").'</li>';
+                                                foreach ($locations as $loc) {
+                                                    if ($ad['location'] == $loc['id']) {
+                                                        echo '<li class="place"><i class="fa fa-map-marker" aria-hidden="true"></i>'.$loc['city'].', '.$loc['district'].'<li>';
+                                                        break;
+                                                    }
+                                                }
+
+                                                foreach ($categories as $cat) {
+                                                    if ($ad['cat_id'] == $cat['id']) {
+                                                        echo '<li class="tag-ctg"><i class="fa fa-tag" aria-hidden="true"></i>'.$cat['category_name'].'</li>';
+                                                        break;
+                                                    }
+                                                }
+                                            echo '</ul>';
+                                            echo '<p></p>';
+                                            echo '<div class="price"></div>';
+                                            echo '<a href="'.base_url().'/ad/'.$ad['slug'].'" alt="'.$ad['title'].'" class="product-details-btn">Details</a>';
+                                        echo '</div>';
+                                    echo '</div>';
+                                }
+                            } else {
+                                echo 'No Other Advertisements Found!';
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -425,10 +335,7 @@
                             <h3 class="title-medium-light title-bar-left size-lg">About us</h3>
                             <ul class="useful-link">
                                 <li>
-                                    <a href="about.html">About us</a>
-                                </li>
-                                <li>
-                                    <a href="#">Career</a>
+                                    <a href="<?php echo base_url(); ?>/about-us">About us</a>
                                 </li>
                                 <li>
                                     <a href="#">Terms &amp; Conditions</a>
@@ -450,13 +357,7 @@
                                     <a href="#">How to sell fast</a>
                                 </li>
                                 <li>
-                                    <a href="#">Buy Now on Classipost</a>
-                                </li>
-                                <li>
                                     <a href="#">Membership</a>
-                                </li>
-                                <li>
-                                    <a href="#">Banner Advertising</a>
                                 </li>
                                 <li>
                                     <a href="#">Promote your ad</a>
@@ -472,13 +373,10 @@
                                     <a href="#">Live Chat</a>
                                 </li>
                                 <li>
-                                    <a href="faq.html">FAQ</a>
+                                    <a href="<?php echo base_url(); ?>/faq">FAQ</a>
                                 </li>
                                 <li>
-                                    <a href="#">Stay safe on classipost</a>
-                                </li>
-                                <li>
-                                    <a href="contact.html">Contact us</a>
+                                    <a href="<?php echo base_url(); ?>/contact-us">Contact us</a>
                                 </li>
                             </ul>
                         </div>

@@ -52,6 +52,9 @@ if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 
 // SEO Friendly URLs
 $routes->add('ad/(:any)','Home::index/$1');
+$routes->add('contact-us/','Contact::index');
+$routes->add('how-it-works/','Home::how_it_works');
+$routes->add('about-us/','Home::about_us');
 // $routes->add('search/(:any)', 'Search::index/$1');
 // $routes->add('search/(:any)/(:any)', 'Search::index/$1/$2');
 // $routes->add('search/(:any)/(:any)/(:any)', 'Search::index/$1/$2/$3');

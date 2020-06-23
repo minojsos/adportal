@@ -21,16 +21,22 @@
                     </div>
                 </li>
 
-                <?php if ($_SESSION['privilege'] == 1): ?>
+                <!-- <?php if ($_SESSION['privilege'] == 1): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-file"></i> Pages
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="<?php echo base_url(); ?>/page">View All</a>
-                            <a class="dropdown-item" href="<?php echo base_url(); ?>/page/create">Add New</a>
-                            <a class="dropdown-item" href="<?php echo base_url(); ?>/faq">FAQ</a>
+                            <a class="dropdown-item" href="<?php //echo base_url(); ?>/page">View All</a>
+                            <a class="dropdown-item" href="<?php //echo base_url(); ?>/page/create">Add New</a>
+                            <a class="dropdown-item" href="<?php //echo base_url(); ?>/faq">FAQ</a>
                         </div>
+                    </li>
+                <?php endif; ?> -->
+
+                <?php if ($_SESSION['privilege'] == 1): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url(); ?>/report"><i class="fas fa-file"></i> Reported Ads</a>
                     </li>
                 <?php endif; ?>
                 
@@ -89,6 +95,12 @@
                             <a class="dropdown-item" href="<?php echo base_url(); ?>/location">View All</a>
                             <a class="dropdown-item" href="<?php echo base_url(); ?>/location/create">Add New</a>
                         </div>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($_SESSION['privilege'] == 1): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url(); ?>/subscribe"><i class="fas fa-users"></i> Subscribers<a>
                     </li>
                 <?php endif; ?>
                 

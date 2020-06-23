@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-3" style="margin-bottom: 30px;">
+                    <div class="col-md-4" style="margin-bottom: 30px;">
                         <div id="stat-box-admin">
                             <div class="content">
                                 <?php echo $countAd; ?>
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-md-3" style="margin-bottom: 30px;">
+                    <div class="col-md-4" style="margin-bottom: 30px;">
                         <div id="stat-box-admin">
                             <div class="content">
                                 <?php echo $countCust; ?>
@@ -32,21 +32,12 @@
                         </div>
                     </div>
                     
-                    <div class="col-md-3" style="margin-bottom: 30px;">
+                    <div class="col-md-4" style="margin-bottom: 30px;">
                         <div id="stat-box-admin">
                             <div class="content">
                                 <?php echo $countCat; ?>
                             </div>
                             <div class="title">Categories</div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-3" style="margin-bottom: 30px;">
-                        <div id="stat-box-admin">
-                            <div class="content">
-                                240
-                            </div>
-                            <div class="title">Page Count</div>
                         </div>
                     </div>
                     
@@ -80,52 +71,52 @@
         <!-- End of Statistics -->
 
         <!-- Latest Posts -->
-        <div class="row">
+        <!-- <div class="row">
         <div class="col-md-12">
                 <h3><i class="fas fa-ad"></i> Latest Advertisements</h3>
                 <div class="row">
                     <?php
-                        if ($advertisement) {
-                            foreach ($advertisement as $advert) {
-                                echo '<div class="col-md-6" style="margin-bottom:30px;">';
-                                    echo '<div class="advert-slider">';
-                                        echo '<div class="advert-slider__wrp swiper-wrapper">';
-                                            echo '<div class="advert-slider__item swiper-slide">';
-                                                echo '<div class="advert-slider__img">';
-                                                    foreach($media as $img) {
-                                                        if (($img['ad_id'] == $advert['id']) && ($img['featured'] == 1)) {
-                                                            echo '<img src="'.base_url().'/assets/uploads/'.$img['path'].'" alt="'.$img['alt'].'"/>';
-                                                            break;
-                                                        }
-                                                    }
-                                                echo '</div>';
+                        // if ($advertisement) {
+                        //     foreach ($advertisement as $advert) {
+                        //         echo '<div class="col-md-6" style="margin-bottom:30px;">';
+                        //             echo '<div class="advert-slider">';
+                        //                 echo '<div class="advert-slider__wrp swiper-wrapper">';
+                        //                     echo '<div class="advert-slider__item swiper-slide">';
+                        //                         echo '<div class="advert-slider__img">';
+                        //                             foreach($media as $img) {
+                        //                                 if (($img['ad_id'] == $advert['id']) && ($img['featured'] == 1)) {
+                        //                                     echo '<img src="'.base_url().'/assets/uploads/'.$img['path'].'" alt="'.$img['alt'].'"/>';
+                        //                                     break;
+                        //                                 }
+                        //                             }
+                        //                         echo '</div>';
 
-                                                echo '<div class="advert-slider__content">';
-                                                    echo '<span class="advert-slider__code">'.$advert['post_date'].' To '.$advert['end_date'].'</span>';
-                                                    echo '<div class="advert-slider__tile">'.$advert['title'].'</div>';
-                                                    echo '<div class="advert-sider__text">'.substr($advert['description'], 0, 100).'</div>';
-                                                    echo '<a href="#" class="advert-slider__button">Read More</a>';
-                                                echo '</div>';
-                                            echo '</div>';
-                                        echo '</div>';
+                        //                         echo '<div class="advert-slider__content">';
+                        //                             echo '<span class="advert-slider__code">'.$advert['post_date'].' To '.$advert['end_date'].'</span>';
+                        //                             echo '<div class="advert-slider__tile">'.$advert['title'].'</div>';
+                        //                             echo '<div class="advert-sider__text">'.substr($advert['description'], 0, 100).'</div>';
+                        //                             echo '<a href="#" class="advert-slider__button">Read More</a>';
+                        //                         echo '</div>';
+                        //                     echo '</div>';
+                        //                 echo '</div>';
 
-                                        echo '<div class="advert-slider__pagination"></div>';
-                                    echo '</div>';
-                                echo '</div>';
-                            }
-                        } else {
-                            echo '<div class="col-md-12">';
-                                echo '<div class="alert alert-warning" role="alert">';
-                                    echo 'No Advertisements Found!';
-                                echo '</div>';
-                            echo '</div>';
-                        }
+                        //                 echo '<div class="advert-slider__pagination"></div>';
+                        //             echo '</div>';
+                        //         echo '</div>';
+                        //     }
+                        // } else {
+                        //     echo '<div class="col-md-12">';
+                        //         echo '<div class="alert alert-warning" role="alert">';
+                        //             echo 'No Advertisements Found!';
+                        //         echo '</div>';
+                        //     echo '</div>';
+                        // }
                     ?>
                     
                 </div>
             </div>
         </div>
-        <br /><br />
+        <br /><br /> -->
         <!-- End Posts -->
         
         <!-- Categories -->
@@ -228,7 +219,7 @@
 <footer class="bg-blue">
     <div class="row">
         <div class="col-md-4">
-            <img src="https://w.ikman-st.com/dist/img/ikman/all/logos/header-33e2ba1f.png" alt="Ad Portal"/>
+            <img src="<?php echo base_url(); ?>/assets/images/logo final 3-3.png" alt="Beluxa Advertisement Portal" style="width:156px;"/>
             <p style="font-weight: 400;"><br>125A, Main Street,<br>Colombo,<br>Sri Lanka</p>
             <p style="font-weight: 400; font-size: 0.75em;">&copy; <?php echo date('Y'); ?>. Developed by <a href="http://zenolk.com" alt="Zeno Innovations (Pvt) Ltd">Zeno Innovations</a>.</p>
         </div>

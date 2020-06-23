@@ -186,6 +186,11 @@
                         </div>
                         <div class="gradient-wrapper mb-60">
                             <ul class="cp-pagination">
+                                <?php if ($pager) :?>
+                                    <?php $pagi_path='public/index.php/users'; ?>
+                                    <?php $pager->setPath($pagi_path); ?>
+                                    <li><?= $pager->links() ?></li>
+                                <?php endif ?> 
                                 <li class="disabled"><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i>Previous</a></li>
                                 <li class="active"><a href="#">1</a></li>
                                 <li><a href="#">2</a></li>
@@ -216,16 +221,14 @@
                     <!--- Categories and Subcategories Filter -->
                     <div class="order-xl-1 order-lg-1 col-xl-3 col-lg-4 col-md-12 col-sm-12 col-12">
 
-                        <!-- Sort By Filter -->
-                        <div class="sidebar-item-box">
+                        <!-- Sort By Filter - Under Development -->
+                        
+                        <!-- <div class="sidebar-item-box">
                             <div class="gradient-wrapper">
                                 <div class="gradient-title" id="header-all-sort">
                                     <h3><i class="fas fa-chevron-down fa-xs" style="margin-right: 15px;"></i> Sort By</h3>
                                 </div>
                                 <ul class="sidebar-category-list" id="content-all-sort">
-                                    <li>
-                                        <a href="#">Best Match</a>
-                                    </li>
                                     <li>
                                         <a href="#">Date: New to Old</a>
                                     </li>
@@ -240,7 +243,7 @@
                                     </li>
                                     </ul>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- End of Sort By Filter -->
 
                         <!--- Categories and Subcategories Filter -->
@@ -604,7 +607,7 @@
 
                                                             foreach ($city as $c) {
                                                                 echo '<li><b>';
-                                                                    echo '<a href="'.base_url().'/search/index/'.strtowlower($selectedDistrict).'/'.strtolower($c['city']).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'?term='.$term.'">'.ucwords($c['city']).'</a>';
+                                                                    echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($c['city']).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'?term='.$term.'">'.ucwords($c['city']).'</a>';
                                                                 echo '</b></li>';
                                                             }
                                                         } else {
@@ -618,7 +621,7 @@
 
                                                             foreach ($city as $c) {
                                                                 echo '<li><b>';
-                                                                    echo '<a href="'.base_url().'/search/index/'.strtowlower($selectedDistrict).'/'.strtolower($c['city']).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">'.ucwords($c['city']).'</a>';
+                                                                    echo '<a href="'.base_url().'/search/index/'.strtolower($selectedDistrict).'/'.strtolower($c['city']).'/'.$selectedCategory['category_slug'].'/'.$selectedSubcategory['sub_category_slug'].'">'.ucwords($c['city']).'</a>';
                                                                 echo '</b></li>';
                                                             }
                                                         }
@@ -779,23 +782,6 @@
         </section>
         <!-- Category Grid View End Here -->
 
-    <!-- Subscribe Area Start Here -->
-    <section class="bg-primary s-space full-width-border-top">
-        <div class="container">
-            <div class="section-title-light">
-                <h2 class="size-lg">Subscribe to Newsletter</h2>
-                <p>Stay in touch with us to receive the latest news about our services</p>
-            </div>
-            <div class="input-group subscribe-area">
-                <input type="email" placeholder="Type your e-mail address" class="form-control" name="email" id="email">
-                <span class="input-group-addon">
-                    <button type="submit" class="cp-default-btn-xl">Subscribe</button>                        
-                </span>
-            </div>
-        </div>
-    </section>
-    <!-- Subscribe Area End Here -->
-
     <!-- Footer Area Start Here -->
     <footer>
         <div class="footer-area-top s-space-equal">
@@ -807,9 +793,6 @@
                             <ul class="useful-link">
                                 <li>
                                     <a href="about.html">About us</a>
-                                </li>
-                                <li>
-                                    <a href="#">Career</a>
                                 </li>
                                 <li>
                                     <a href="#">Terms &amp; Conditions</a>
@@ -825,19 +808,13 @@
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                         <div class="footer-box">
-                            <h3 class="title-medium-light title-bar-left size-lg">How to sell fast</h3>
+                            <h3 class="title-medium-light title-bar-left size-lg">How to Sell</h3>
                             <ul class="useful-link">
                                 <li>
-                                    <a href="#">How to sell fast</a>
-                                </li>
-                                <li>
-                                    <a href="#">Buy Now on Classipost</a>
+                                    <a href="#">How to Sell</a>
                                 </li>
                                 <li>
                                     <a href="#">Membership</a>
-                                </li>
-                                <li>
-                                    <a href="#">Banner Advertising</a>
                                 </li>
                                 <li>
                                     <a href="#">Promote your ad</a>
@@ -854,9 +831,6 @@
                                 </li>
                                 <li>
                                     <a href="faq.html">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="#">Stay safe on classipost</a>
                                 </li>
                                 <li>
                                     <a href="contact.html">Contact us</a>

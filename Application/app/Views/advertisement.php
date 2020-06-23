@@ -27,6 +27,14 @@
                         <h3><i class="fas fa-ad"></i> All Advertisements</h3>
                         <br />
                         <?php
+                            if (session('msg')) {
+                                echo '<div class="alert alert-success" role="alert">'.session('msg').'</div><br>';
+                            }
+
+                            if (session('error')) {
+                                echo '<div class="alert alert-danger" role="alert">'.session('error').'</div><br>';
+                            }
+
                             if ($advertisement) {
                                 echo '<table class="table table-striped table-bordered" id="advertisement">';
                                     echo '<thead>';
@@ -50,11 +58,11 @@
                                                 echo '<td>'.$advert['end_date'].'</td>';
                                                 
                                                 if ($advert['status'] == 0) {
-                                                    echo '<td><i class="fas fa-circle inactive-circle"></i></td>';
+                                                    echo '<td><i class="fas fa-circle inactive-circle"></i> <a href="'.base_url().'/advertisement/activate/'.$advert['id'].'">Activate</a></td>';
                                                 } elseif ($advert['status'] == 1) {
-                                                    echo '<td><i class="fas fa-circle active-circle"></i></td>';
+                                                    echo '<td><i class="fas fa-circle active-circle"></i> <a href="'.base_url().'/advertisement/deactivate/'.$advert['id'].'">Deactivate</a></td>';
                                                 } else {
-                                                    echo '<td><i class="fas fa-circle renew-circle"></i></td>';
+                                                    echo '<td><i class="fas fa-circle renew-circle"></i> <a href="'.base_url().'/advertisement/renew/'.$advert['id'].'">Renew</a></td>';
                                                 }
 
                                                 foreach($admin as $ad) {
@@ -65,8 +73,8 @@
                                                 }
 
                                                 echo '<td>'.$advert['views'].'</td>';
-                                                echo '<td><a class="a-orange" href="advertisement/edit/'.$advert['id'].'" alt="Edit Advertisement - '.$advert['title'].'">Edit</td>';
-                                                echo '<td><a class="a-orange" href="advertisement/edit/'.$advert['id'].'" alt="Delete Advertisement - '.$advert['title'].'">Delete</td>';
+                                                echo '<td><a class="a-orange" href="advertisement/edit/'.$advert['id'].'" alt="Edit Advertisement - '.$advert['title'].'"><i class="far fa-edit" aria-hidden="true"></i></td>';
+                                                echo '<td><a class="a-orange" href="advertisement/edit/'.$advert['id'].'" alt="Delete Advertisement - '.$advert['title'].'"><i class="far fa-trash-alt" aria-hidden="true"></i></td>';
                                             echo '</tr>';
                                         }
                                     echo '</tbody>';
@@ -94,7 +102,7 @@
 <footer class="bg-blue">
     <div class="row">
         <div class="col-md-4">
-            <img src="https://w.ikman-st.com/dist/img/ikman/all/logos/header-33e2ba1f.png" alt="Ad Portal"/>
+            <img src="<?php echo base_url(); ?>/assets/images/logo final 3-3.png" alt="Beluxa Advertisement Portal" style="width:156px;"/>
             <p style="font-weight: 400;"><br>125A, Main Street,<br>Colombo,<br>Sri Lanka</p>
             <p style="font-weight: 400; font-size: 0.75em;">&copy; <?php echo date('Y'); ?>. Developed by <a href="http://zenolk.com" alt="Zeno Innovations (Pvt) Ltd">Zeno Innovations</a>.</p>
         </div>
